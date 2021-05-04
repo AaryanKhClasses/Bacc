@@ -1,0 +1,8 @@
+node_modules
+package-lock.json
+json.sqlite
+kat.png
+commands/commands/moderation/warnings.js
+events
+utils
+config.json
