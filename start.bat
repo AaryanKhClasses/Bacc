@@ -1,1 +1,1 @@
-node .
+npx nodemon index.js

@@ -1,24 +1,35 @@
 const { MessageEmbed } = require("discord.js")
 const config = require('../../../config.json')
+const modlogsSchema = require("../../../schemas/modlogsSchema.js")
+const mongo = require('../../../utils/mongo.js')
 
 module.exports = {
     commands: 'ban',
-    cooldown: 0,
     permlevel: 2,
-    callback: (message, args) => {
-        const channel = message.guild.channels.cache.get(config.modlogs)
+    callback: async(client, message, args) => {
+        const channell = message.guild.channels.cache.find(ch => ch.name === "mod-logs").id
+        const channel = message.guild.channels.cache.get(config.modlogs) || message.guild.channels.cache.get(channell)
 
         if(message.member.hasPermission('BAN_MEMBERS')){
             let reason = args.slice(1).join(' ')
 
-            const user = message.mentions.members.first()
+            let user
+            if(message.mentions.members.first()) {
+                user = message.mentions.members.first()
+            }else if(args[0]) {
+                user = message.guild.members.cache.get(args[0])
+            }
             if(!user){
                 const embed = new MessageEmbed()
                 .setDescription(`${config.emojis.no} Please mention a member to ban!`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed)
+                message.channel.send(embed).then((message) => {
+                    message.delete({
+                        timeout: 5000
+                    })
+                })
             }
 
             if(!reason) reason = 'No Reason Specified!'
@@ -29,7 +40,12 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed)
+                message.channel.send(embed).then((message) => {
+                    message.delete({
+                        timeout: 5000
+                    })
+                })
+
             } else {
                 message.guild.members.ban(user.id, {days: 7, reason: reason})
                 const embed = new MessageEmbed()
@@ -37,7 +53,12 @@ module.exports = {
                 .setColor('GREEN')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed)
+                message.channel.send(embed).then((message) => {
+                    message.delete({
+                        timeout: 5000
+                    })
+                })
+                message.delete()
 
                 const logembed = new MessageEmbed()
                 .setTitle('Member Banned!')
@@ -70,6 +91,40 @@ module.exports = {
                 .setFooter(config.botname)
                 .setTimestamp()
                 user.send(userEmbed)
+
+                const guildId = message.guild.id
+                const userId = user.id
+                const modlogs = {
+                    logtype: 'Ban',
+                    author: message.member.user.tag,
+                    authorId: message.member.id,
+                    moderator: message.author.tag,
+                    timestamp: new Date().getTime(),
+                    reason
+                }
+
+                await mongo().then(async(mongoose) => {
+                    try {
+                        await modlogsSchema.findOneAndUpdate(
+                            {
+                                guildId,
+                                userId,
+                            },
+                            {
+                                guildId,
+                                userId,
+                                $push: {
+                                    modLog: modlogs
+                                }
+                            },
+                            {
+                                upsert: true
+                            }
+                        )
+                    } finally {
+                        mongoose.connection.close()
+                    }
+                })
             }
         } else {
             const embed = new MessageEmbed()
@@ -77,7 +132,11 @@ module.exports = {
             .setColor('RED')
             .setFooter(config.botname)
             .setTimestamp()
-            message.channel.send(embed)
+            message.channel.send(embed).then((message) => {
+                message.delete({
+                    timeout: 5000
+                })
+            })
         }
     }
 }

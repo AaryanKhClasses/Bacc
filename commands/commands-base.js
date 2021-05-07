@@ -51,7 +51,6 @@ module.exports = (client, commandOptions) => {
                 if(message.member.hasPermission("MANAGE_GUILD")) permlevel = 3;
                 if(message.member.id === message.guild.ownerID) permlevel = 4;
                 if(message.member.id === config.botOwner) permlevel = 5;
-                
 
                 const arguments = content.split(/[ ]+/)
                 arguments.shift()
@@ -68,7 +67,7 @@ module.exports = (client, commandOptions) => {
                     }, 1000 * cooldown)
                 }
 
-                callback(message, arguments, arguments.join(' '), client)
+                callback(client, message, arguments, arguments.join(' '))
                 return
             }
         }

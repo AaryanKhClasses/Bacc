@@ -18,9 +18,10 @@
   },
   "homepage": "https://github.com/AaryanKhClasses/Bacc#readme",
   "dependencies": {
-    "better-sqlite3": "^7.2.0",
+    "canvacord": "^5.2.0",
     "discord.js": "^12.5.3",
+    "mongoose": "^5.12.7",
     "ms": "^2.1.3",
-    "quick.db": "^7.1.3"
+    "nodemon": "^2.0.7"
   }
 }

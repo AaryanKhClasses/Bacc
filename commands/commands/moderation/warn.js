@@ -82,7 +82,7 @@ module.exports = {
                     user.send(userEmbed)
 
                 if(warns[`${user.id}, ${message.guild.id}`].warns == 2){
-                    const mutedRole = message.guild.roles.cache.find(config.mutedRole)
+                    const mutedRole = message.guild.roles.cache.find(r => r.id === config.mutedRole)
                     const mutedTime = '60s'
 
                     message.guild.member(user).roles.add(mutedRole)

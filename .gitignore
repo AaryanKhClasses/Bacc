@@ -1,8 +1,5 @@
 node_modules
 package-lock.json
-json.sqlite
-kat.png
-commands/commands/moderation/warnings.js
-events
-utils
+commands/commands/setup.js
+commands/commands/start.js
 config.json
