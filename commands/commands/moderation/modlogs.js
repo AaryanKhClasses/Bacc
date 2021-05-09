@@ -14,7 +14,7 @@ module.exports = {
             } else if(args[0]) {
                 user = message.guild.members.cache.get(args[0])
             } else {
-                user = message.author
+                user = message.member
             }
 
             if(!user){
@@ -49,7 +49,7 @@ module.exports = {
                         message.channel.send(embed)
                     }
                     for(const log of result.modLog){
-                        const { logtype, author, authorId, moderator, timestamp, reason } = modlogs
+                        const { logtype, author, authorId, moderator, timestamp, reason } = modLog
                         let arr = []
                         arr.push(`**LogType:** ${logtype}\n**Author:** ${author} <@${authorId}>\n**Moderator:** ${moderator}\n**Date:** ${new Date(timestamp).toLocaleDateString()}\n**Reason:** ${reason}\n`)
                     

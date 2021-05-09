@@ -7,8 +7,8 @@ module.exports = {
     commands: 'kick',
     permlevel: 2,
     callback: async(client, message, args) => {
-        const channell = message.guild.channels.cache.find(ch => ch.name === "mod-logs").id
-        const channel = message.guild.channels.cache.get(config.modlogs) || message.guild.channels.cache.get(channell)
+        const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
+        const channel = message.guild.channels.cache.get(channell)
 
         if(message.member.hasPermission('KICK_MEMBERS')){
             let reason = args.slice(1).join(' ')
@@ -26,7 +26,20 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed).then((message) => {
+                return message.channel.send(embed).then((message) => {
+                    message.delete({
+                        timeout: 5000
+                    })
+                })
+            }
+
+            if(user.id === message.author.id) {
+                const embed = new MessageEmbed()
+                .setDescription(`${config.emojis.no} You can't kick yourself! Why do you even wanna do that?`)
+                .setColor('RED')
+                .setFooter(config.botname)
+                .setTimestamp()
+                return message.channel.send(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -41,7 +54,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed).then((message) => {
+                return message.channel.send(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -133,7 +146,7 @@ module.exports = {
             .setColor('RED')
             .setFooter(config.botname)
             .setTimestamp()
-            message.channel.send(embed).then((message) => {
+            return message.channel.send(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })

@@ -34,7 +34,7 @@ module.exports = (client) => {
         }else if(joinLogs){
             const embed = new MessageEmbed()
             .setAuthor('Member Joined', member.user.displayAvatarURL())
-            .addField('Member Joined Date', member.user.createdAt)
+            .addField('Member Joined Date', new Date(member.user.createdTimestamp).toLocaleDateString)
             .addField('Member ID', member.id)
             .setDescription(`<@${member.id}> ${member.user.tag}`)
             .setColor('GREEN')
@@ -54,7 +54,7 @@ module.exports = (client) => {
                 if(invitesBefore[inviter] === invitesAfter[inviter] - 1) {
                     const count = invitesAfter[inviter]
                     const embed = new MessageEmbed()
-                    .setDescription(`Welcome to **${member.guild.name}**, <@!${member.user.id}> Please read the rules of the server in <#${config.rulesChannel}>!`)
+                    .setDescription(`Welcome to **${member.guild.name}**, <@!${member.user.id}> Please read the rules of the server in <#${config.rulesChannel}>!\n Thanks to ${inviter} for inviting them! They now have ${count} invites!`)
                     .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL())
                     .setColor('GREEN')
                     .setFooter(config.botname)

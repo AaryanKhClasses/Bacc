@@ -1,23 +1,26 @@
 const { MessageEmbed } = require('discord.js')
-const fs = require('fs')
-const ms = require('ms')
-const db = require('quick.db')
 const config = require('../../../config.json')
+const modlogsSchema = require("../../../schemas/modlogsSchema")
+const mongo = require("../../../utils/mongo")
 
 module.exports = {
     commands: 'warn',
     permlevel: 1,
-    cooldown: 3,
-    callback: async(message, args) => {
-        if(message.content === "!warnings"){
+    callback: async(client, message, args) => {
+        if(message.content.startsWith("!warnings")){
             return
         } else {
-            const channel = message.guild.channels.cache.get(config.modlogs)
+            const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
+            const channel = message.guild.channels.cache.get(channell)
 
             if(message.member.hasPermission('MANAGE_MESSAGES')){
                 let reason = args.slice(1).join(' ')
-                const user = message.mentions.members.first()
-                let warns = JSON.parse(fs.readFileSync('commands/commands/moderation/warnings.json', 'utf-8'))
+                let user
+                if(message.mentions.members.first()) {
+                    user = message.mentions.members.first()
+                } else if(args[0]) {
+                    user = message.guild.members.cache.get(args[0])
+                }
 
                 if(!user){
                     const embed = new MessageEmbed()
@@ -25,29 +28,39 @@ module.exports = {
                     .setColor('RED')
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.channel.send(embed)
+                    return message.channel.send(embed).then((message) => {
+                        message.delete({
+                            timeout: 5000
+                        })
+                    })
+                }
+
+                if(user.id === message.author.id) {
+                    const embed = new MessageEmbed()
+                    .setDescription(`${config.emojis.no} You can't warn yourself! Why do you even wanna do that?`)
+                    .setColor('RED')
+                    .setFooter(config.botname)
+                    .setTimestamp()
+                    return message.channel.send(embed).then((message) => {
+                        message.delete({
+                            timeout: 5000
+                        })
+                    })
                 }
 
                 if(reason.length < 1) reason = 'No Reason Supplied!'
-
-                if(!warns[`${user.id}, ${message.guild.id}`]) warns[`${user.id}, ${message.guild.id}`] = {
-                    warns: 0
-                }
-
-                warns[`${user.id}, ${message.guild.id}`].warns++
-
-                fs.writeFile('commands/commands/moderation/warnings.json', JSON.stringify(warns), err => {
-                    if(err) throw err
-                })
 
                 const embed = new MessageEmbed()
                 .setDescription(`${config.emojis.yes} The member has been warned!`)
                 .setColor('GREEN')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed)
-
-                db.push(`modlogs.${user.id}.log`, `**LogType:** Warn\n**Moderator:** ${message.author.id} (<@${message.author.id}>)\n**Reason:** ${reason}`)
+                message.channel.send(embed).then((message) => {
+                    message.delete({
+                        timeout: 5000
+                    })
+                })
+                message.delete()
 
                 const logembed = new MessageEmbed()
                 .setTitle('Member Warned!')
@@ -75,56 +88,60 @@ module.exports = {
                 channel.send(logembed)
 
                 const userEmbed = new MessageEmbed()
-                    .setColor('RED')
-                    .setDescription(`${config.emojis.no} You were warned in **${message.guild.name}** for reason: **${reason}**!`)
-                    .setFooter(config.botname)
-                    .setTimestamp()
-                    user.send(userEmbed)
+                .setColor('RED')
+                .setDescription(`${config.emojis.no} You were warned in **${message.guild.name}** for reason: **${reason}**!`)
+                .setFooter(config.botname)
+                .setTimestamp()
+                user.send(userEmbed)
 
-                if(warns[`${user.id}, ${message.guild.id}`].warns == 2){
-                    const mutedRole = message.guild.roles.cache.find(r => r.id === config.mutedRole)
-                    const mutedTime = '60s'
-
-                    message.guild.member(user).roles.add(mutedRole)
-                    const mEmbed = new MessageEmbed()
-                    .setDescription(`${config.emojis.yes} The member had 2 warns and is muted temporarily!`)
-                    .setColor('GREEN')
-                    .setFooter(config.botname)
-                    .setTimestamp()
-                    message.channel.send(mEmbed)
-
-                    setTimeout(function(){
-                        message.guild.member(user).roles.remove(mutedRole)
-                    }, ms(mutedTime));
+                const guildId = message.guild.id
+                const userId = user.id
+                const modlogs = {
+                    logtype: 'Warn',
+                    author: message.member.user.tag,
+                    authorId: message.member.id,
+                    moderator: message.author.tag,
+                    timestamp: new Date().getTime(),
+                    reason
                 }
 
-                if(warns[`${user.id}, ${message.guild.id}`].warns == 5){
-                    message.guild.member(user).kick(`5 Warns by ${config.botname}!`)
-                    const kEmbed = new MessageEmbed()
-                    .setDescription(`${config.emojis.yes} The member had 5 warns and is kicked from the server!`)
-                    .setColor('GREEN')
-                    .setFooter(config.botname)
-                    .setTimestamp()
-                    message.channel.send(kEmbed)
-                }
+                await mongo().then(async(mongoose) => {
+                    try {
+                        await modlogsSchema.findOneAndUpdate(
+                            {
+                                guildId,
+                                userId,
+                            },
+                            {
+                                guildId,
+                                userId,
+                                $push: {
+                                    modLog: modlogs
+                                }
+                            },
+                            {
+                                upsert: true
+                            }
+                        )
+                    } finally {
+                        mongoose.connection.close()
+                    }
+                })
 
-                if(warns[`${user.id}, ${message.guild.id}`].warns == 10){
-                    message.guild.member(user).ban(`10 Warns by ${config.botname}!`)
-                    const bEmbed = new MessageEmbed()
-                    .setDescription(`${config.emojis.yes} The member had 10 warns and is banned from the server!`)
-                    .setColor('GREEN')
-                    .setFooter(config.botname)
-                    .setTimestamp()
-                    message.channel.send(bEmbed)
-                }
             } else {
                 const embed = new MessageEmbed()
                 .setDescription(`<:emojino:779190801598775317> You don't have permissions to use this command!`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed)
+                return message.channel.send(embed).then((message) => {
+                    message.delete({
+                        timeout: 5000
+                    })
+                })
             }
         }
     }
 }
+        
+    
