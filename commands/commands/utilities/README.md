@@ -17,4 +17,9 @@
   - **Cooldown:** 5 seconds
   - **Perm Level:** 1 (MANAGE_MESSAGES)
 
+- #### **Slowmode:**  Sets the slowmode of a channel
+  - **Usage:** !slowmode <'channel' / ''> [duration]
+  - **Cooldown:** 5 seconds
+  - **Perm Level:** 2 (BAN_MEMBERS)
+
 ##### PS: [] equals (mandatory)

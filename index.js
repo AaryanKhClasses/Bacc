@@ -6,6 +6,7 @@ const loadCommands = require('./commands/load-commands')
 const levelling = require('./utils/levelling')
 const levels = require('./utils/levels')
 const loadEvents = require('./events/load-events')
+const loadFeatures = require('./features/load-features')
 
 client.on('ready', () => {
     console.log('The Bot is Online!')
@@ -13,6 +14,7 @@ client.on('ready', () => {
 
     loadCommands(client)
     loadEvents(client)
+    loadFeatures(client)
     new levelling(client)
     levels(client)
     

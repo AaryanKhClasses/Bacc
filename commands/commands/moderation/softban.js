@@ -1,16 +1,16 @@
+const { MessageEmbed } = require("discord.js")
 const config = require('../../../config.json')
-const { MessageEmbed } = require('discord.js')
 const modlogsSchema = require("../../../schemas/modlogsSchema.js")
 const mongo = require('../../../utils/mongo.js')
 
 module.exports = {
-    commands: 'mute',
+    commands: 'softban',
+    permlevel: 2,
     callback: async(client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
-        const mutedRole = message.guild.roles.cache.find(r => r.name.includes("Muted")).id
 
-        if(message.member.hasPermission('MANAGE_ROLES')){
+        if(message.member.hasPermission('BAN_MEMBERS')){
             let reason = args.slice(1).join(' ')
 
             let user
@@ -19,10 +19,9 @@ module.exports = {
             }else if(args[0]) {
                 user = message.guild.members.cache.get(args[0])
             }
-
             if(!user){
                 const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} Please mention a member to mute!`)
+                .setDescription(`${config.emojis.no} Please mention a member to soft-ban!`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
@@ -35,20 +34,7 @@ module.exports = {
 
             if(user.id === message.author.id) {
                 const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} You can't mute yourself! Why do you even wanna do that?`)
-                .setColor('RED')
-                .setFooter(config.botname)
-                .setTimestamp()
-                return message.channel.send(embed).then((message) => {
-                    message.delete({
-                        timeout: 5000
-                    })
-                })
-            }
-
-            if(user.roles.cache.find(r => r.name === "Muted")) {
-                const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} Cannot mute the user as they are already muted!`)
+                .setDescription(`${config.emojis.no} You can't soft-ban yourself! Why do you even wanna do that?`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
@@ -63,7 +49,7 @@ module.exports = {
             
             if(user.hasPermission('MANAGE_GUILD') || user.hasPermission("BAN_MEMBERS")){
                 const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} That user is a mod/admin! I can't mute them!`)
+                .setDescription(`${config.emojis.no} That user is a mod/admin! I can't soft-ban them!`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
@@ -74,9 +60,10 @@ module.exports = {
                 })
 
             } else {
-                user.roles.add(mutedRole, reason)
+                message.guild.members.ban(user.id, {days: 7, reason: `Softbanned: ${reason}`})
+                message.guild.members.unban(user.id, 'Softbanned')
                 const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.yes} Successfully muted <@${user.id}>!`)
+                .setDescription(`${config.emojis.yes} Successfully Soft banned <@${user.id}>!`)
                 .setColor('GREEN')
                 .setFooter(config.botname)
                 .setTimestamp()
@@ -88,14 +75,14 @@ module.exports = {
                 message.delete()
 
                 const logembed = new MessageEmbed()
-                .setTitle('Member Muted!')
+                .setTitle('Member Softbanned!')
                 .setColor('GREEN')
                 .setFooter(config.botname)
                 .setTimestamp()
                 .addFields(
                     {
                         name: 'Action',
-                        value: 'Mute',
+                        value: 'Softban',
                     },
                     {
                         name: 'User',
@@ -114,7 +101,7 @@ module.exports = {
 
                 const userEmbed = new MessageEmbed()
                 .setColor('RED')
-                .setDescription(`${config.emojis.no} You were muted in **${message.guild.name}** for reason: **${reason}**!`)
+                .setDescription(`${config.emojis.no} You were softbanned from **${message.guild.name}** for reason: **${reason}**!`)
                 .setFooter(config.botname)
                 .setTimestamp()
                 user.send(userEmbed)
@@ -122,7 +109,7 @@ module.exports = {
                 const guildId = message.guild.id
                 const userId = user.id
                 const modlogs = {
-                    logtype: 'Mute',
+                    logtype: 'Soft-Ban',
                     author: message.member.user.tag,
                     authorId: message.member.id,
                     moderator: message.author.tag,

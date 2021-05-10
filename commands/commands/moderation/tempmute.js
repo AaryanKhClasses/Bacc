@@ -1,17 +1,19 @@
 const config = require('../../../config.json')
 const { MessageEmbed } = require('discord.js')
+const ms = require('ms')
 const modlogsSchema = require("../../../schemas/modlogsSchema.js")
 const mongo = require('../../../utils/mongo.js')
 
 module.exports = {
-    commands: 'mute',
+    commands: 'tempmute',
     callback: async(client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
         const mutedRole = message.guild.roles.cache.find(r => r.name.includes("Muted")).id
+        const mutedTime = args[1]
 
         if(message.member.hasPermission('MANAGE_ROLES')){
-            let reason = args.slice(1).join(' ')
+            let reason = args.slice(2).join(' ')
 
             let user
             if(message.mentions.members.first()) {
@@ -59,6 +61,19 @@ module.exports = {
                 })
             }
 
+            if(!mutedTime) {
+                const embed = new MessageEmbed()
+                .setDescription(`${config.emojis.no} Please specify a time to mute the user!\nEx., 60s, 10m, 2hr, etc.`)
+                .setColor('RED')
+                .setFooter(config.botname)
+                .setTimestamp()
+                return message.channel.send(embed).then((message) => {
+                    message.delete({
+                        timeout: 5000
+                    })
+                })
+            }
+
             if(!reason) reason = 'No Reason Specified!'
             
             if(user.hasPermission('MANAGE_GUILD') || user.hasPermission("BAN_MEMBERS")){
@@ -86,6 +101,10 @@ module.exports = {
                     })
                 })
                 message.delete()
+                setTimeout(function(){
+                message.guild.member(user).roles.remove(mutedRole)
+                }, ms(mutedTime));
+
 
                 const logembed = new MessageEmbed()
                 .setTitle('Member Muted!')
@@ -95,7 +114,7 @@ module.exports = {
                 .addFields(
                     {
                         name: 'Action',
-                        value: 'Mute',
+                        value: 'Temp Mute',
                     },
                     {
                         name: 'User',
@@ -114,7 +133,7 @@ module.exports = {
 
                 const userEmbed = new MessageEmbed()
                 .setColor('RED')
-                .setDescription(`${config.emojis.no} You were muted in **${message.guild.name}** for reason: **${reason}**!`)
+                .setDescription(`${config.emojis.no} You were temperorily muted in **${message.guild.name}** for reason: **${reason}**!\nYou are muted for **${mutedTime}**!`)
                 .setFooter(config.botname)
                 .setTimestamp()
                 user.send(userEmbed)
@@ -122,7 +141,7 @@ module.exports = {
                 const guildId = message.guild.id
                 const userId = user.id
                 const modlogs = {
-                    logtype: 'Mute',
+                    logtype: 'Temp Mute',
                     author: message.member.user.tag,
                     authorId: message.member.id,
                     moderator: message.author.tag,

@@ -23,43 +23,31 @@ module.exports = async(client) => {
             message.channel.send(embed)
         }
         if(user.level === 1) {
-            const lvl1role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl1)
+            const lvl1role = message.guild.roles.cache.find(r => r.name.includes('Level 1'))
             message.guild.member(message.author.id).roles.add(lvl1role)
         }
         if(user.level === 10) {
-            const lvl1role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl1)
-            const lvl10role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl10)
-            message.guild.member(message.author.id).roles.remove(lvl1role)
+            const lvl10role = message.guild.roles.cache.find(r => r.name.includes('Level 10'))
             message.guild.member(message.author.id).roles.add(lvl10role)
         }
         if(user.level === 20) {
-            const lvl10role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl10)
-            const lvl20role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl20)
-            message.guild.member(message.author.id).roles.remove(lvl10role)
+            const lvl20role = message.guild.roles.cache.find(r => r.name.includes('Level 20'))
             message.guild.member(message.author.id).roles.add(lvl20role)
         }
         if(user.level === 35) {
-            const lvl20role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl20)
-            const lvl35role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl35)
-            message.guild.member(message.author.id).roles.remove(lvl20role)
+            const lvl35role = message.guild.roles.cache.find(r => r.name.includes('Level 35'))
             message.guild.member(message.author.id).roles.add(lvl35role)
         }
         if(user.level === 50) {
-            const lvl35role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl35)
-            const lvl50role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl50)
-            message.guild.member(message.author.id).roles.remove(lvl35role)
+            const lvl50role = message.guild.roles.cache.find(r => r.name.includes('Level 50'))
             message.guild.member(message.author.id).roles.add(lvl50role)
         }
         if(user.level === 75) {
-            const lvl50role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl50)
-            const lvl75role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl75)
-            message.guild.member(message.author.id).roles.remove(lvl50role)
+            const lvl75role = message.guild.roles.cache.find(r => r.name.includes('Level 75'))
             message.guild.member(message.author.id).roles.add(lvl75role)
         }
         if(user.level === 100) {
-            const lvl75role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl75)
-            const lvl100role = message.guild.roles.cache.find(r => r.id === config.levelRoles.lvl100)
-            message.guild.member(message.author.id).roles.remove(lvl75role)
+            const lvl100role = message.guild.roles.cache.find(r => r.name.includes('Level 100'))
             message.guild.member(message.author.id).roles.add(lvl100role)
         }
     })

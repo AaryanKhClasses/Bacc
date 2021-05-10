@@ -3,3 +3,6 @@ package-lock.json
 commands/commands/setup.js
 commands/commands/start.js
 config.json
+features
+schemas/countingSchema.js
+schemas/rolesSchema.js

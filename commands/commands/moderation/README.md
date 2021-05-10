@@ -19,12 +19,28 @@
   -  **Perm Level:** 1 (MANAGE_MESSAGES)
 
 -  #### **Warnings:** Check the warnings of a member and sends it!
-  -  **Usage:** !modlogs [mention member / member id]
+  -  **Usage:** !warnings [mention member / member id]
   -  **Perm Level:** 1 (MANAGE_MESSAGES)
   
 -  #### **Whois:** Gives the userinfo of a person(General Info and Member Info)
-  -  **Usage:** !modlogs [mention member / member id]
+  -  **Usage:** !whois [mention member / member id] 
   -  **Perm Level:** 0 (SEND_MESSAGES)
+
+-  #### **Mute:** Mutes a member! Logs it in a "mod-logs" Channel and in the Database too!
+  -  **Usage:** !mute [mention member / member id] \<reason>
+  -  **Perm Level:** 2 (BAN_MEMBERS)
+
+-  #### **Unmute:** Unmutes a member! Logs it in a "mod-logs" Channel and in the Database too!
+  -  **Usage:** !unmute [mention member / member id] \<reason>
+  -  **Perm Level:** 2 (BAN_MEMBERS)
+
+-  #### **Temp-Mute:** Temporarily mutes a member! Logs it in a "mod-logs" Channel and in the Database too!
+  -  **Usage:** !modlogs [mention member / member id] [duration] \<reason>
+  -  **Perm Level:** 2 (BAN_MEMBERS)
+
+-  #### **SoftBan:** Bans and immediatly unbans a member to delete its messages! Logs it in a "mod-logs" Channel and in the Database too!
+  -  **Usage:** !modlogs [mention member / member id] \<reason>
+  -  **Perm Level:** 2 (BAN_MEMBERS)
 
 ###### PS: <> equals (optional)
 ###### [] equals (mandatory)

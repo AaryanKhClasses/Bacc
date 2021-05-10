@@ -34,7 +34,7 @@ module.exports = (client) => {
         }else if(joinLogs){
             const embed = new MessageEmbed()
             .setAuthor('Member Joined', member.user.displayAvatarURL())
-            .addField('Member Joined Date', new Date(member.user.createdTimestamp).toLocaleDateString)
+            .addField('Member Joined Date', new Date(member.user.createdTimestamp).toLocaleDateString())
             .addField('Member ID', member.id)
             .setDescription(`<@${member.id}> ${member.user.tag}`)
             .setColor('GREEN')
