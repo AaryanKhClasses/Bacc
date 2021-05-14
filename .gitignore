@@ -6,3 +6,7 @@ config.json
 features
 schemas/countingSchema.js
 schemas/rolesSchema.js
+commands/upcoming-commands-base.js
+schemas/cooldownSchema.js
+commands/commands/moderation/modlogs.js
+commands/commands/moderation/warnings.js

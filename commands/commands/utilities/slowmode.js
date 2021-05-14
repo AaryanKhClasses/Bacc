@@ -6,6 +6,8 @@ module.exports = {
     commands: 'slowmode',
     cooldown: 5,
     callback: (client, message, args) => {
+        const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
+        const channel = message.guild.channels.cache.get(channell)
         if(message.member.hasPermission('MANAGE_CHANNELS')){
             if(args[0] === 'channel'){ //!sm channel [channelid] [time]
                 const channelId = args[1]
@@ -37,7 +39,7 @@ module.exports = {
                     })
                 }
     
-                message.guild.channels.cache.setRateLimitPerUser(ms(time))
+                message.guild.channels.cache.setRateLimitPerUser((ms(time)) / 1000)
                 const embed = new MessageEmbed()
                 .setDescription(`${config.emojis.yes} Successfully set slowmode of <#${channelId}> as ${time}`)
                 .setColor('GREEN')
@@ -92,7 +94,7 @@ module.exports = {
                     })
                 }
     
-                message.guild.channels.cache.setRateLimitPerUser(ms(time))
+                message.channel.setRateLimitPerUser((ms(time))/1000)
                 const embed = new MessageEmbed()
                 .setDescription(`${config.emojis.yes} Successfully set slowmode of this channel as ${time}`)
                 .setColor('GREEN')

@@ -5,7 +5,7 @@ const config = require('../../../config.json')
 
 module.exports = {
     commands: 'warnings',
-    permlevel: 1,
+    cooldown: 10,
     callback: async(client, message, args) => {
         if(message.member.hasPermission('MANAGE_MESSAGES')){
             let user

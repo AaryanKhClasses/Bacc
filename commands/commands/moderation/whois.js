@@ -20,12 +20,12 @@ module.exports = {
         }   
 
         let permlevel
-        if(target.hasPermission("SEND_MESSAGES")) permlevel = '0 (Normal Member)';
-        if(target.hasPermission("MANAGE_MESSAGES")) permlevel = '1 (Helper)';
-        if(target.hasPermission("BAN_MEMBERS")) permlevel = '2 (Moderator)';
-        if(target.hasPermission("MANAGE_GUILD")) permlevel = '3 (Administrator)';
-        if(target.id === message.guild.ownerID) permlevel = '4 (Server Owner)';
-        if(target.id === config.botOwner) permlevel = '5 (Bot Owner)';
+        if(target.hasPermission("SEND_MESSAGES")) permlevel = '0 (Normal Member)'
+        if(target.hasPermission("MANAGE_MESSAGES")) permlevel = '1 (Helper)'
+        if(target.hasPermission("BAN_MEMBERS")) permlevel = '2 (Moderator)'
+        if(target.hasPermission("MANAGE_GUILD")) permlevel = '3 (Administrator)'
+        if(target.id === message.guild.ownerID) permlevel = '4 (Server Owner)'
+        if(target.id === config.botOwner) permlevel = '5 (Bot Owner)'
 
         const embed = new MessageEmbed()
         .setAuthor(`${target.user.tag}`, target.user.displayAvatarURL())

@@ -48,8 +48,12 @@ module.exports = {
                     timeout: 5000
                 })
             })
-            message.delete()
-            message.channel.bulkDelete(args[0])
+            message.delete().then(() => {
+                setTimeout(
+                    message.channel.bulkDelete(args[0]), 2000
+                )
+            })
+            
 
             const logembed = new MessageEmbed()
             .setTitle('Message(s) Purged!')

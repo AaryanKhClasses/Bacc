@@ -1,5 +1,6 @@
 const config = require('../config.json')
-
+const { MessageEmbed } = require('discord.js')
+const premium = ['840494427595866142']
 let recentlyRan = []
 
 module.exports = (client, commandOptions) => {
@@ -7,7 +8,6 @@ module.exports = (client, commandOptions) => {
         commands,
         cooldown = -1,
         callback,
-        permlevel,
     } = commandOptions
 
     if(!commands){
@@ -34,10 +34,14 @@ module.exports = (client, commandOptions) => {
                 console.log('cooldownString: ', cooldownString)
 
                 if(cooldown > 0 && recentlyRan.includes(cooldownString)){
-                    message
-                    .reply('a little too quick there.')
-                    .then((thisMessage) => {
-                        thisMessage.delete({
+                    const embed = new MessageEmbed()
+                    .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                    .setDescription(`${config.emojis.no} You are using the commands very quickly! Please wait for some time to use the command again!\n**TIP:** A premium server has half the cooldown!`)
+                    .setColor('RED')
+                    .setFooter(config.botname)
+                    .setTimestamp()
+                    message.channel.send(embed).then((message) => {
+                        message.delete({
                             timeout: 5000
                         })
                     })
@@ -45,29 +49,36 @@ module.exports = (client, commandOptions) => {
                     return
                 }
 
-                if(message.member.hasPermission("SEND_MESSAGES")) permlevel = 0;
-                if(message.member.hasPermission("MANAGE_MESSAGES")) permlevel = 1;
-                if(message.member.hasPermission("BAN_MEMBERS")) permlevel = 2;
-                if(message.member.hasPermission("MANAGE_GUILD")) permlevel = 3;
-                if(message.member.id === message.guild.ownerID) permlevel = 4;
-                if(message.member.id === config.botOwner) permlevel = 5;
+                const arguments = content.split(/[ ]+/) //split on any number of spaces
+                arguments.shift() //Removes the command which is the first index
 
-                const arguments = content.split(/[ ]+/)
-                arguments.shift()
-
-                if(cooldown > 0){
-                    recentlyRan.push(cooldownString)
-                    setTimeout(() => {
-                        console.log('BEFORE: ', recentlyRan)
-                        recentlyRan = recentlyRan.filter((string) => {
-                            return string !== cooldownString
-                        })
-
-                        console.log('AFTER: ', recentlyRan)
-                    }, 1000 * cooldown)
+                if(premium.includes(guild.id)){
+                    if(cooldown > 0){
+                        recentlyRan.push(cooldownString)
+                        setTimeout(() => {
+                            console.log('BEFORE: ', recentlyRan)
+                            recentlyRan = recentlyRan.filter((string) => {
+                                return string !== cooldownString
+                            })
+    
+                            console.log('AFTER: ', recentlyRan)
+                        }, 500 * cooldown)
+                    }
+                } else{
+                    if(cooldown > 0){
+                        recentlyRan.push(cooldownString)
+                        setTimeout(() => {
+                            console.log('BEFORE: ', recentlyRan)
+                            recentlyRan = recentlyRan.filter((string) => {
+                                return string !== cooldownString
+                            })
+    
+                            console.log('AFTER: ', recentlyRan)
+                        }, 1000 * cooldown)
+                    }
                 }
 
-                callback(client, message, arguments, arguments.join(' '))
+                callback(client, message, arguments, arguments.join(' ')) //handle the custom command code
                 return
             }
         }

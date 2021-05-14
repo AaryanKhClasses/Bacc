@@ -5,7 +5,7 @@ const config = require('../../../config.json')
 
 module.exports = {
     commands: 'modlogs',
-    permlevel: 2,
+    cooldown: 10,
     callback: async(client, message, args) => {
         if(message.member.hasPermission('KICK_MEMBERS')){
             let user

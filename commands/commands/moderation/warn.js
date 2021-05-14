@@ -5,7 +5,7 @@ const mongo = require("../../../utils/mongo")
 
 module.exports = {
     commands: 'warn',
-    permlevel: 1,
+    cooldown: 10,
     callback: async(client, message, args) => {
         if(message.content.startsWith("!warnings")){
             return

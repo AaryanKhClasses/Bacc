@@ -6,11 +6,12 @@ const mongo = require('../../../utils/mongo.js')
 
 module.exports = {
     commands: 'tempmute',
+    cooldown: 10,
     callback: async(client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
         const mutedRole = message.guild.roles.cache.find(r => r.name.includes("Muted")).id
-        const mutedTime = args[1]
+        const mutedTime = args[1] / 1000
 
         if(message.member.hasPermission('MANAGE_ROLES')){
             let reason = args.slice(2).join(' ')

@@ -11,3 +11,4 @@
   - **Cooldown:** 10 seconds
 
 ###### PS: <> equals (optional)
+###### **TIP:** Get half the cooldown by purchasing **Premium** Bacc!

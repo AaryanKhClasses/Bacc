@@ -2,8 +2,8 @@ const config = require('../../config.json')
 const { MessageEmbed } = require('discord.js')
 
 module.exports = (client) => {
-    const joinLogs = config.joinlogs
     client.on('guildMemberRemove', async(member) => {
+        const joinLogs = member.guild.channels.cache.find(ch => ch.name.includes('join-logs'))
         const { guild } = member
         if(!joinLogs){
             return

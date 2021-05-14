@@ -5,7 +5,7 @@ const canvacord = require('canvacord')
 
 module.exports = {
     commands: ['rank', 'level'],
-    cooldown: 0,
+    cooldown: 10,
     callback: async(client, message, args) => {
         let target
         if(message.mentions.users.first()) {

@@ -5,6 +5,7 @@ const mongo = require('../../../utils/mongo.js')
 
 module.exports = {
     commands: 'mute',
+    cooldown: 10,
     callback: async(client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)

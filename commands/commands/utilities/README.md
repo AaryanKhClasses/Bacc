@@ -23,3 +23,4 @@
   - **Perm Level:** 2 (BAN_MEMBERS)
 
 ##### PS: [] equals (mandatory)
+###### **TIP:** Get half the cooldown by purchasing **Premium** Bacc!
