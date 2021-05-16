@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('./config.json')
+require('dotenv').config()
 
 const loadCommands = require('./commands/load-commands')
 const levelling = require('./utils/levelling')
@@ -20,4 +21,4 @@ client.on('ready', () => {
     
 })
 
-client.login(config.token)
+client.login(process.env.CLIENT_TOKEN)

@@ -1,7 +1,7 @@
 {
   "name": "Bacc",
-  "version": "1.0-BETA",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A multipurpose and a fully customisable discord bot!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/AaryanKhClasses/Bacc.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "AaryanKh",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AaryanKhClasses/Bacc/issues"
@@ -21,6 +21,7 @@
     "canvacord": "^5.2.0",
     "discord.js": "^12.5.3",
     "discord.js-menu": "^2.3.1",
+    "dotenv": "^9.0.2",
     "jimp": "^0.16.1",
     "mongoose": "^5.12.7",
     "ms": "^2.1.3",
