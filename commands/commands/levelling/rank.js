@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js")
-const Levelling = require("../../../utils/levelling")
+const Levelling = require("../../../utils/levelling.js")
 const config = require('../../../config.json')
 const canvacord = require('canvacord')
 

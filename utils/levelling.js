@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const levelSchema = require('../schemas/levelSchema')
+const levelSchema = require('../schemas/levelSchema.js')
 var mongoUrl
 
 class Levelling {

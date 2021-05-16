@@ -1,4 +1,4 @@
-const levelling = require('../../../utils/levelling')
+const levelling = require('../../../utils/levelling.js')
 const { MessageEmbed } = require('discord.js')
 const config = require('../../../config.json')
 

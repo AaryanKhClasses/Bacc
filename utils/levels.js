@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const Levelling = require('./levelling')
+const Levelling = require('./levelling.js')
 const config = require('../config.json')
 
 Levelling.setURL(config.mongoPass)
