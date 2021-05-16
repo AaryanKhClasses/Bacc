@@ -10,3 +10,4 @@ schemas/cooldownSchema.js
 commands/commands/moderation/modlogs.js
 commands/commands/moderation/warnings.js
 .env
+supportServer
