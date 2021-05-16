@@ -28,6 +28,7 @@ module.exports = {
         if(target.id === config.botOwner) permlevel = '5 (Bot Owner)'
 
         const embed = new MessageEmbed()
+        .setTitle(`User Info for ${target.user.tag}`)
         .setAuthor(`${target.user.tag}`, target.user.displayAvatarURL())
         .setColor(target.roles.highest.hexColor)
         .setFooter(config.botname)
@@ -35,19 +36,19 @@ module.exports = {
         .setThumbnail(target.user.displayAvatarURL())
         .setDescription(
             `**General Information**\n` +
-            `\t**Nickname:** ${target.nickname || 'None'}\n` +
-            `\t**Username:** ${target.user.username}\n` +
-            `\t**User ID:** ${target.id}\n` +
-            `\t**isBot:** ${target.user.bot}\n` +
-            `\t**Creation Date:** ${new Date(target.user.createdTimestamp).toLocaleDateString()}\n` +
-            `\t**Status:** ${(target.presence.status).toUpperCase()}\n\n` +
+            `${config.emojis.blank}**Nickname:** ${target.nickname || 'None'}\n` +
+            `${config.emojis.blank}**Username:** ${target.user.username}\n` +
+            `${config.emojis.blank}**User ID:** ${target.id}\n` +
+            `${config.emojis.blank}**isBot:** ${target.user.bot}\n` +
+            `${config.emojis.blank}**Creation Date:** ${new Date(target.user.createdTimestamp).toLocaleDateString()}\n` +
+            `${config.emojis.blank}**Status:** ${(target.presence.status).toUpperCase()}\n\n` +
             `**Member Information:**\n` +
-            `\t**Color:** ${(target.roles.highest.hexColor).toUpperCase()}\n` +
-            `\t**Joining Date:** ${new Date(target.joinedTimestamp).toLocaleDateString()}\n` +
-            `\t**Roles:** ${(target.roles ? target.roles.cache.map(r => `${r}`).join(' ') : '').replace('@everyone', '')}\n` +
-            `\t**Permission Level:** ${permlevel}\n` +
-            `\t**Permissions:** ${(target.permissions.toArray().join(`, `).replace(/_/g, ' ')).toProperCase(true)}`)
-
+            `${config.emojis.blank}**Color:** ${(target.roles.highest.hexColor).toUpperCase()}\n` +
+            `${config.emojis.blank}**Joining Date:** ${new Date(target.joinedTimestamp).toLocaleDateString()}\n` +
+            `${config.emojis.blank}**Roles:** ${(target.roles ? target.roles.cache.map(r => `${r}`).join(' ') : '').replace('@everyone', '')}\n` +
+            `${config.emojis.blank}**Permission Level:** ${permlevel}\n`
+        )
+        .addField(`Permissions`, (target.permissions.toArray().join(`, `).replace(/_/g, ' ')).toProperCase(true))
             
         message.channel.send(embed)
     }

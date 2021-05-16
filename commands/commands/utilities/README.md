@@ -22,5 +22,10 @@
   - **Cooldown:** 5 seconds
   - **Perm Level:** 2 (BAN_MEMBERS)
 
+- #### **ServerInfo:**  Shows the info of the server
+  - **Usage:** !serverinfo
+  - **Cooldown:** 10 seconds
+  - **Perm Level:** 0 (SEND_MESSAGES)
+
 ##### PS: [] equals (mandatory)
 ###### **TIP:** Get half the cooldown by purchasing **Premium** Bacc!
