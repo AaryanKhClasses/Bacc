@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const levelSchema = require('../schemas/levelSchema.js')
-var mongoUrl
+require('dotenv').config()
+var mongoUrl = process.env.MONGOPASS
 
 class Levelling {
     static async setURL(dbUrl) {

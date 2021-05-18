@@ -1,8 +1,8 @@
 const { MessageEmbed } = require('discord.js')
 const Levelling = require('./levelling.js')
-const config = require('../config.json')
+require('dotenv').config()
 
-Levelling.setURL(config.mongoPass)
+Levelling.setURL(process.env.MONGOPASS)
 
 module.exports = async(client) => {
     client.on('message', async(message) => {

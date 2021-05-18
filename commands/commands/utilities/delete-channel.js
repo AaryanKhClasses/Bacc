@@ -2,10 +2,10 @@ const config = require('../../../config.json')
 const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-    commands: 'channel-topic',
+    commands: 'delete-channel',
     cooldown: 10,
     callback: (client, message, args) => {
-        if(message.member.hasPermission('MANAGE_CHANNELS')) {
+        if(message.member.hasPermission('ADMINISTARTOR')) {
             const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
             const channel = message.guild.channels.cache.get(channell)
 
@@ -13,43 +13,16 @@ module.exports = {
             if(message.mentions.channels.first()) {
                 channelId = message.mentions.channels.first().id
             } else if(args[0]){
-                channelId = message.guild.channels.cache.get(args[0]).id
+                channelId = message.guild.channels.cache.find(ch => ch.id === args[0]).id
+            } else {
+                channelId = message.channel.id
             }
-            const topic = args.slice(1).join(' ')
             const Channel = message.guild.channels.cache.find(ch => ch.id === channelId)
 
-            if(!topic) {
-                const embed = new MessageEmbed()
-                .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
-                .setDescription(`${config.emojis.no} Please specify a sentence to make it the topic of the channel!`)
-                .setFooter(config.botname)
-                .setColor('RED')
-                .setTimestamp()
-                return message.channel.send(embed).then((message) => {
-                    message.delete({
-                        timeout: 5000
-                    })
-                })
-            }
-
-            if(!channelId) {
-                const embed = new MessageEmbed()
-                .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
-                .setDescription(`${config.emojis.no} Please specify the channel you want to change topic of!`)
-                .setFooter(config.botname)
-                .setColor('RED')
-                .setTimestamp()
-                return message.channel.send(embed).then((message) => {
-                    message.delete({
-                        timeout: 5000
-                    })
-                })
-            }
-
-            message.guild.channels.cache.find(ch => ch.id === channelId).setTopic(`${topic}`)
+            Channel.delete()
             const embed = new MessageEmbed()
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
-            .setDescription(`${config.emojis.yes} Successfully set topic of channel **${Channel}** as\n**${topic}**!`)
+            .setDescription(`${config.emojis.yes} Successfully deleted **#${Channel.name}**!`)
             .setFooter(config.botname)
             .setColor('GREEN')
             .setTimestamp()
@@ -61,26 +34,22 @@ module.exports = {
             message.delete()
 
             const logembed = new MessageEmbed()
-            .setTitle('Channel Topic Edited!')
-            .setColor('#F1C40F')
+            .setTitle('Channel Deleted!')
+            .setColor('RED')
             .setFooter(config.botname)
             .setTimestamp()
             .addFields(
                 {
                     name: 'Action',
-                    value: 'Channel Topic Edited',
+                    value: 'Channel Deleted',
                 },
                 {
                     name: 'Moderator',
                     value: `${message.author.tag} (<@${message.author.id}>)`,
                 },
                 {
-                    name: 'Channel Name',
-                    value: `${Channel}`
-                },
-                {
-                    name: 'Topic',
-                    value: topic
+                    name: 'Channel',
+                    value: `${Channel.name}`
                 }
             )
             channel.send(logembed)
