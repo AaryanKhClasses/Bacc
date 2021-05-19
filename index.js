@@ -15,7 +15,7 @@ client.on('ready', () => {
 
     loadCommands(client)
     loadEvents(client)
-    loadFeatures(client)
+    // loadFeatures(client)
     new levelling(client)
     levels(client)
     

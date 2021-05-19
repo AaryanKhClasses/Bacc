@@ -61,8 +61,28 @@ module.exports = {
                 value: 'Check the leaderboard using this command! This will only show the top 10 users(according to XP) with their levels!\n**Usage:** `!leaderboard`'
             },
             {
-                name: '➕ More Commands!',
-                value: 'We are also adding more commands with each update! Commands like `set-xp`, `set-level` and many more **ADMIN-ONLY** commands will be added in the near future!'
+                name: '⚡ Add-Levels!',
+                value: 'Adds levels to a member! Specify the number of levels and the member to add levels to!\n**Usage:** `!add-levels [member(mention or id)] [number of levels]`'
+            },
+            {
+                name: '⚡ Add-XP!',
+                value: 'Adds XP to a member! Specify the number of XP and the member to add XP to!\n**Usage:** `!add-xp [member(mention or id)] [amount of XP]`'
+            },
+            {
+                name: '❗ Subtract-Levels!',
+                value: 'Subtracts levels from a member! Specify the number of levels and the member to remove levels from!\n**Usage:** `!remove-levels [member(mention or id)] [number of levels]`'
+            },
+            {
+                name: '❗ Subtract-XP!',
+                value: 'Subtracts XP to a member! Specify the number of XP and the member to remove XP from!\n**Usage:** `!remove-xp [member(mention or id)] [amount of XP]`'
+            },
+            {
+                name: '❌ Set-Levels!',
+                value: 'Sets levels of a member! Specify the number of levels and the member to set the level of!\n**Usage:** `!set-level [member(mention or id)] [number of levels]`'
+            },
+            {
+                name: '❌ Set-XP!',
+                value: 'Sets XP of a member! Specify the number of XP and the member to set XP of!\n**Usage:** `!set-xp [member(mention or id)] [amount of XP]`'
             }
         )
 

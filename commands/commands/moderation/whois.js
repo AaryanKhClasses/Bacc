@@ -1,10 +1,6 @@
 const { MessageEmbed } = require("discord.js")
 const config = require('../../../config.json')
-
-String.prototype.toProperCase = function(opt_lowerCaseTheRest) {
-    return (opt_lowerCaseTheRest ? this.toLowerCase() : this)
-      .replace(/(^|[\s\xA0])[^\s\xA0]/g, function(s){ return s.toUpperCase(); });
-  };
+const properCase = require('../../../utils/properCase.js')
 
 module.exports = {
     commands: ['whois', 'userinfo'],
