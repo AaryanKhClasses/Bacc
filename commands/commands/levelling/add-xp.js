@@ -1,6 +1,6 @@
 const config = require('../../../config.json')
 const { MessageEmbed } = require('discord.js')
-const levelling = require('../../../utils/levelling.js')
+const { levelling } = require('BaccLib')
 
 module.exports = {
     commands: 'add-xp',
@@ -48,7 +48,7 @@ module.exports = {
                 })
             }
 
-            levelling.appendXp(target.id, message.guild.id, xp)
+            levelling.addXp(target.id, message.guild.id, xp)
             const embed = new MessageEmbed()
             .setDescription(`${config.emojis.yes} Successfully added ${xp} XP to <@${target.id}>!`)
             .setColor('GREEN')

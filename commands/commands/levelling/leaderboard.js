@@ -1,4 +1,4 @@
-const levelling = require('../../../utils/levelling.js')
+const { levelling } = require('BaccLib')
 const { MessageEmbed } = require('discord.js')
 const config = require('../../../config.json')
 
@@ -6,7 +6,7 @@ module.exports = {
     commands: ['leaderboard', 'lb'],
     cooldown: 10,
     callback: async(client, message, args) => {
-        const rawleaderboard = await levelling.fetchLeaderboard(message.guild.id, 10)
+        const rawleaderboard = await levelling.fetchXpLeaderboard(message.guild.id, 10)
         if(rawleaderboard.length < 1) {
             const embed = new MessageEmbed()
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
@@ -17,7 +17,7 @@ module.exports = {
             return message.channel.send(embed)
         }
 
-        const leaderboard = await levelling.computeLeaderboard(client, rawleaderboard)
+        const leaderboard = await levelling.computeXpLeaderboard(client, rawleaderboard)
         const lb = leaderboard.map(e => `${e.position}. ${e.username}${e.discriminator}\n**Level:** ${e.level} | **XP:** ${e.xp.toLocaleString()}`)
         const embed = new MessageEmbed()
         .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())

@@ -1,8 +1,8 @@
 const { MessageEmbed } = require('discord.js')
-const Levelling = require('./levelling.js')
+const { levelling } = require('BaccLib')
 require('dotenv').config()
 
-Levelling.setURL(process.env.MONGOPASS)
+levelling.setURL(process.env.MONGOPASS)
 
 module.exports = async(client) => {
     client.on('message', async(message) => {
@@ -11,8 +11,8 @@ module.exports = async(client) => {
         if(message.content.startsWith('!')) return
 
         const randomXp = Math.floor(Math.random() * 9) + 1
-        const hasLevelledUp = await Levelling.appendXp(message.author.id, message.guild.id, randomXp)
-        const user = await Levelling.fetch(message.author.id, message.guild.id);
+        const hasLevelledUp = await levelling.addXp(message.author.id, message.guild.id, randomXp)
+        const user = await levelling.fetchXp(message.author.id, message.guild.id);
         if(hasLevelledUp) {
             const embed = new MessageEmbed()
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())

@@ -1,6 +1,6 @@
 const config = require('../../../config.json')
 const { MessageEmbed } = require('discord.js')
-const levelling = require('../../../utils/levelling.js')
+const { levelling } = require('BaccLib')
 
 module.exports = {
     commands: 'add-levels',
@@ -48,7 +48,7 @@ module.exports = {
                 })
             }
 
-            levelling.appendLevel(target.id, message.guild.id, levels)
+            levelling.addLevel(target.id, message.guild.id, levels)
             const embed = new MessageEmbed()
             .setDescription(`${config.emojis.yes} Successfully gave ${levels} levels to <@${target.id}>!`)
             .setColor('GREEN')

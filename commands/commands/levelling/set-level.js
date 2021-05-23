@@ -1,6 +1,6 @@
 const config = require('../../../config.json')
 const { MessageEmbed } = require('discord.js')
-const levelling = require('../../../utils/levelling.js')
+const { levelling } = require('BaccLib')
 
 module.exports = {
     commands: 'set-level',

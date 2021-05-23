@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js")
-const Levelling = require("../../../utils/levelling.js")
+const { levelling } = require("BaccLib")
 const config = require('../../../config.json')
 const canvacord = require('canvacord')
 
@@ -15,8 +15,8 @@ module.exports = {
         } else {
             target = message.author
         }
-        const user = await Levelling.fetch(target.id, message.guild.id)
-        const neededXp = Levelling.xpFor(parseInt(user.level) + 1)
+        const user = await levelling.fetchXp(target.id, message.guild.id)
+        const neededXp = levelling.xpFor(parseInt(user.level) + 1)
         if(!user) {
             const embed = new MessageEmbed()
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
@@ -28,18 +28,17 @@ module.exports = {
         }
 
         const rank = new canvacord.Rank()
-            .setAvatar(target.displayAvatarURL({ dynamic: false, format: 'png' }))
-            .setCurrentXP(user.xp)
-            .setLevel(user.level)
-            .setRequiredXP(neededXp)
-            .setStatus(target.presence.status)
-            .setProgressBar('#FFFFFF')
-            .setUsername(target.username)
-            .setDiscriminator(target.discriminator)
-        rank.build()
-            .then(data => {
-                const attachment = new MessageAttachment(data, 'rank.png')
-                message.channel.send(attachment)
-            })
+        .setAvatar(target.displayAvatarURL({ dynamic: false, format: 'png' }))
+        .setCurrentXP(user.xp)
+        .setLevel(user.level)
+        .setRequiredXP(neededXp)
+        .setStatus(target.presence.status)
+        .setProgressBar('#FFFFFF')
+        .setUsername(target.username)
+        .setDiscriminator(target.discriminator)
+        rank.build().then(data => {
+            const attachment = new MessageAttachment(data, 'rank.png')
+            message.channel.send(attachment)
+        })
     }
 }

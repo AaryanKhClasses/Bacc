@@ -130,7 +130,7 @@ module.exports = {
 
             } else {
                 const embed = new MessageEmbed()
-                .setDescription(`<:emojino:779190801598775317> You don't have permissions to use this command!`)
+                .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
