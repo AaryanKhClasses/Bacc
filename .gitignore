@@ -11,3 +11,4 @@ commands/commands/moderation/modlogs.js
 commands/commands/moderation/warnings.js
 .env
 supportServer
+commands/commands/economy/daily.js

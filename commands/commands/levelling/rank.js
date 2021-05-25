@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageAttachment } = require("discord.js")
-const { levelling } = require("BaccLib")
+const { levelling } = require("bacclib")
 const config = require('../../../config.json')
 const canvacord = require('canvacord')
 

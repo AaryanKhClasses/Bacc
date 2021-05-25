@@ -1,6 +1,6 @@
 const config = require('../config.json')
 const { MessageEmbed } = require('discord.js')
-const premium = ['840494427595866142']
+const premium = ['840494427595866142', '846372708694229012']
 let recentlyRan = []
 
 module.exports = (client, commandOptions) => {

@@ -1,4 +1,4 @@
-const { levelling } = require('BaccLib')
+const { levelling } = require('bacclib')
 const { MessageEmbed } = require('discord.js')
 const config = require('../../../config.json')
 

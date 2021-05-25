@@ -1,0 +1,30 @@
+{
+    "work": [
+        "You worked at a vegetable stall and got some profit!",
+        "You worked at a bank counter and got some tip!",
+        "You worked at a hamburger stall!",
+        "You worked as a professional Minecraft Parkourist!",
+        "You got your montly salary as a school teacher!",
+        "You worked as a desk cleaner of a taco-burger stall!",
+        "You got some coins in your bank locker!",
+        "You worked as a discord bot developer!",
+        "You found some coins in your cupboard!",
+        "You worked as a software develope!r",
+        "You got coins from your mother to buy whatever you want!",
+        "You worked as a car washer!"
+    ],
+    "crimeSuccess": [
+        "You went to rob a bank with a banana. Somehow it worked!",
+        "You stole some coins from an ice-cream stand!",
+        "You stole some coins from a persons pocket!",
+        "You robbed a poor man. Be guilty! Anyways,",
+        "You found an unknown pouch. You opened it!"
+    ],
+    "crimeFailures": [
+        "You went to rob a bank with a banana. Why would you do that?",
+        "You listened to a friend and tried to rob a person. But police caught you!",
+        "You have been caught stealing some jewellery!",
+        "You tried to rob a shop but suddenly police came here!",
+        "You got a gun and tried to rob some shop but after you threatned the man, you understood it was a water gun"
+    ]
+}

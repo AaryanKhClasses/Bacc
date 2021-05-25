@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const loadCommands = require('./commands/load-commands.js')
 const levels = require('./utils/levels.js')
+const economy = require('./utils/economy.js')
 const loadEvents = require('./events/load-events.js')
 const loadFeatures = require('./features/load-features.js')
 
@@ -16,6 +17,7 @@ client.on('ready', () => {
     loadEvents(client)
     loadFeatures(client)
     levels(client)
+    economy(client)
     
 })
 

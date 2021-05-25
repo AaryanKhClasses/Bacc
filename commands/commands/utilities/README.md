@@ -27,5 +27,18 @@
   - **Cooldown:** 10 seconds
   - **Perm Level:** 0 (SEND_MESSAGES)
 
+- #### **Emote:** Lots of different functions!
+  - #### **Subcommands:**
+     - **Add Emote:** Adds the specified emoji to the server!
+       - **Usage:** !emote add [image link] [emoji name]
+    - **Remove Emote:** Removes the specified emoji from the server
+      - **Usage:** !emote remove [emoji name]
+    - **Rename Emote:** Renames the specified emoji
+      - **Usage:** !emote rename [previous emoji name] [new emoji name]
+    - **Emote Stats:** Shows the number of emojis and slots in the server
+      - **Usage:** !emote stats
+  - **Cooldown:** 10 seconds
+  - **Perm Level:** 2 (BAN_MEMBERS)
+
 ##### PS: [] equals (mandatory)
 ###### **TIP:** Get half the cooldown by purchasing **Premium** Bacc!

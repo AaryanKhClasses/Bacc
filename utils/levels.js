@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const { levelling } = require('BaccLib')
+const { levelling } = require('bacclib')
 require('dotenv').config()
 
 levelling.setURL(process.env.MONGOPASS)
@@ -23,7 +23,7 @@ module.exports = async(client) => {
             message.channel.send(embed)
         }
         if(user.level === 1) {
-            const lvl1role = message.guild.roles.cache.find(r => r.name.includes('Level 1'))
+            const lvl1role = message.guild.roles.cache.find((r => r.name.includes('Level 1')) && (r => !r.name.includes('Level 10')))
             message.guild.member(message.author.id).roles.add(lvl1role)
         }
         if(user.level === 10) {
