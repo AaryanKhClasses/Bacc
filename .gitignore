@@ -11,6 +11,5 @@ commands/commands/moderation/modlogs.js
 commands/commands/moderation/warnings.js
 .env
 supportServer
-utils/levels.js
-commands/commands/levelling
+commands/commands/economy/daily.js
 

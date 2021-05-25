@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/AaryanKhClasses/Bacc#readme",
   "dependencies": {
+    "bacclib": "^1.0.2",
     "canvacord": "^5.2.0",
     "discord.js": "^12.5.3",
     "discord.js-menu": "^2.3.1",
