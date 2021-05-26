@@ -12,4 +12,5 @@ commands/commands/moderation/warnings.js
 .env
 supportServer
 commands/commands/economy/daily.js
+commands/commands/music
 

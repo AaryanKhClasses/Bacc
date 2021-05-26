@@ -4,7 +4,7 @@ const { economy } = require('bacclib')
 const { crimeFailures, crimeSuccess } = require('./replies.json')
 
 module.exports = {
-    commands: 'work',
+    commands: 'crime',
     cooldown: 43200, //12hrs
     callback: (client, message, args) => {
         let successMin = 300
@@ -21,7 +21,7 @@ module.exports = {
             const embed = new MessageEmbed()
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
             .setColor('GREEN')
-            .setDescription(`${config.emojis.yes} ${crimeSuccess[Math.floor(Math.random() * crimeSuccess.length)]} You got ${config.emojis.currency} ${amount}`)
+            .setDescription(`${config.emojis.yes} ${crimeSuccess[Math.floor(Math.random() * crimeSuccess.length)]} You got ${config.emojis.currency} ${successAmount}`)
             .setFooter(config.botname)
             .setTimestamp()    
             return message.channel.send(embed)
@@ -31,7 +31,7 @@ module.exports = {
             const embed = new MessageEmbed()
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
             .setColor('RED')
-            .setDescription(`${config.emojis.yes} ${crimeFailures[Math.floor(Math.random() * crimeFailures.length)]} You lost ${config.emojis.currency} ${amount}`)
+            .setDescription(`${config.emojis.yes} ${crimeFailures[Math.floor(Math.random() * crimeFailures.length)]} You lost ${config.emojis.currency} ${failureAmount}`)
             .setFooter(config.botname)
             .setTimestamp()    
             return message.channel.send(embed)
