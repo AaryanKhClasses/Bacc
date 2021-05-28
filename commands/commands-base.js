@@ -1,5 +1,7 @@
 const config = require('../config.json')
 const { MessageEmbed } = require('discord.js')
+// const guildSchema = require('../schemas/blacklists/guildSchema')
+// const userSchema = require('../schemas/blacklists/userSchema')
 const premium = ['840494427595866142', '846372708694229012']
 let recentlyRan = []
 
@@ -48,6 +50,40 @@ module.exports = (client, commandOptions) => {
                     message.delete()
                     return
                 }
+
+                // const guildBlacklist = await guildSchema.findOne({ guildID: guild.id })
+                // if(guildBlacklist) {
+                //     const embed = new MessageEmbed()
+                //     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                //     .setDescription(`${config.emojis.no} This server has been blacklisted by the bot owner! Contact <@${config.botOwner}> for help!\n**TIP:** Buy premium or [Fill Blacklist appeal](https://dsc.gg/bacc) to unblacklist the server!`)
+                //     .setColor('RED')
+                //     .setFooter(config.botname)
+                //     .setTimestamp()
+                //     message.channel.send(embed).then((message) => {
+                //         message.delete({
+                //             timeout: 5000
+                //         })
+                //     })
+                //     message.delete()
+                //     return
+                // }
+
+                // const userBlacklist = await userSchema.findOne({ userID: member.id })
+                // if(userBlacklist) {
+                //     const embed = new MessageEmbed()
+                //     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                //     .setDescription(`${config.emojis.no} You has been blacklisted by the bot owner! Contact <@${config.botOwner}> for help!\n**TIP:** [Fill Blacklist appeal](https://dsc.gg/bacc) to get unblacklisted!`)
+                //     .setColor('RED')
+                //     .setFooter(config.botname)
+                //     .setTimestamp()
+                //     message.channel.send(embed).then((message) => {
+                //         message.delete({
+                //             timeout: 5000
+                //         })
+                //     })
+                //     message.delete()
+                //     return
+                // }
 
                 const arguments = content.split(/[ ]+/) //split on any number of spaces
                 arguments.shift() //Removes the command which is the first index

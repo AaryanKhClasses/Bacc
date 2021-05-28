@@ -1,6 +1,6 @@
 {
   "name": "Bacc",
-  "version": "1.0.4-BETA",
+  "version": "1.0.4-BETA2",
   "description": "A multipurpose and a fully customisable discord bot!",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/AaryanKhClasses/Bacc#readme",
   "dependencies": {
     "@discord-player/extractor": "^3.0.0",
+    "@iamtraction/google-translate": "^1.1.2",
     "bacclib": "^1.0.2",
     "canvacord": "^5.2.0",
     "discord-player": "^2.3.1",

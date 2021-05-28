@@ -34,6 +34,10 @@ module.exports = {
                 value: 'This bot has utility commands too!\n> Commands to make channels, set slowmode and some more are available!'
             },
             {
+                name: '🎈 Fun',
+                value: 'This bot has fun commands to relax yourslves too!\n> Commands like meme, google and translate commands are available!'
+            },
+            {
                 name: '🌐 Global Commands:',
                 value: 'The global commands of this bot are shown here!\n> Commands like ping, help and setup are given here!\n'
             },
@@ -110,6 +114,10 @@ module.exports = {
             {
                 name: '🐱‍👤 Crime:',
                 value: 'Do crime to earn coins! You can get lots of coins by doing this! But you have a high chance of getting caught and lose coins!\nThis command has a cooldown of **12 hours**!\n**Usage:** `!crime`'
+            },
+            {
+                name: '➕ More Commands:',
+                value: 'We are also adding more commands with each update! Commands like `daily`, `rob` and many more commands will be added in the near future!'
             }
         )
 
@@ -277,15 +285,78 @@ module.exports = {
             }
         )
 
+        const fun = new MessageEmbed() 
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(`#3498DB`)
+        .setFooter(`Version ${package.version} of ${config.botname}`)
+        .setTimestamp()
+        .setTitle(`Help Menu for ${config.botname}`)
+        .setDescription(
+            `**Fun Commands**\n` +
+            `**This is the fun help menu for the bot!**\n` +
+            `Fun commands are listed here! These are commands which are for fun and will relax you!\n\n` +
+            `**Fun Commands**\n`
+        )
+        .addFields(
+            {
+                name: '🐸 Meme:',
+                value: 'Sends a random meme from the subreddit `r/memes` !\n**Usage:** `!meme`'
+            },
+            {
+                name: '🗺 Translate:',
+                value: 'Translate any sentence to the specified langauge!\n**Usage:** `!translate [langauge] [text to translate]`'
+            },
+            {
+                name: '🖼 Image-Related Commands:',
+                value: 'These are image related commands! React with 🖼 to see all the commands!'
+            },
+            {
+                name: '➕ More Commands:',
+                value: 'We are also adding more commands with each update! Commands like `google`, `define` and many more commands will be added in the near future!'
+            }
+        )
+
+        const image = new MessageEmbed() 
+        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+        .setColor(`#3498DB`)
+        .setFooter(`Version ${package.version} of ${config.botname}`)
+        .setTimestamp()
+        .setTitle(`Help Menu for ${config.botname}`)
+        .setDescription(
+            `**Image Commands**\n` +
+            `**This is the fun help menu for the bot!**\n` +
+            `Image-Related Fun commands are listed here! These are commands which are related to images!\n\n` +
+            `**Fun Commands**\n`
+        )
+        .addFields(
+            {
+                name: '📷 Avatar:',
+                value: 'Sends your avatar or the avatar of the specified member!\n**Usage:** `!avatar (optional member)`'
+            },
+            {
+                name: '😺 Cat:',
+                value: 'Sends a random cute cat picture!\n**Usage:** `!cat`'
+            },
+            {
+                name: '🐶 Dog:',
+                value: 'Sends a random cute dog picture!\n**Usage:** `!dog`'
+            },
+            {
+                name: '➕ More Commands:',
+                value: 'We are also adding more commands with each update! Commands like `shibe`, `triggered` and many more commands will be added in the near future!'
+            }
+        )
+
 
         let helpMenu = new Menu(message.channel, message.author.id, [
             {
                 name: 'main',
                 content: main,
                 reactions: {
-                    '🔼': 'levelling',
+                    '🔼' : 'levelling',
                     '⚒' : 'moderation',
                     '🛠' : 'utility',
+                    '🎈' : 'fun',
                     '842308687389130803' : 'delete'
                 }
             },
@@ -302,7 +373,7 @@ module.exports = {
                 name: 'economy',
                 content: economy,
                 reactions: {
-                    '◀': 'main',
+                    '◀' : 'main',
                     '842308687389130803' : 'delete'
                 }
             },
@@ -319,9 +390,9 @@ module.exports = {
                 name: 'utility',
                 content: utility,
                 reactions: {
-                    '◀': 'main',
-                    '1️⃣': 'roles',
-                    '2️⃣': 'emotes',
+                    '◀' : 'main',
+                    '1️⃣' : 'roles',
+                    '2️⃣' : 'emotes',
                     '842308687389130803' : 'delete'
                 }
             },
@@ -329,8 +400,8 @@ module.exports = {
                 name: 'roles',
                 content: roles,
                 reactions: {
-                    '⏮': 'main',
-                    '◀': 'utility',
+                    '⏮' : 'main',
+                    '◀' : 'utility',
                     '842308687389130803' : 'delete'
                 }
             },
@@ -338,8 +409,26 @@ module.exports = {
                 name: 'emotes',
                 content: emotes,
                 reactions: {
-                    '⏮': 'main',
-                    '◀': 'utility',
+                    '⏮' : 'main',
+                    '◀' : 'utility',
+                    '842308687389130803' : 'delete'
+                }
+            },
+            {
+                name: 'fun',
+                content: fun,
+                reactions: {
+                    '◀' : 'main',
+                    '🖼' : 'image',
+                    '842308687389130803' : 'delete'
+                }
+            },
+            {
+                name: 'image',
+                content: image,
+                reactions: {
+                    '⏮' : 'main',
+                    '◀' : 'fun',
                     '842308687389130803' : 'delete'
                 }
             }
