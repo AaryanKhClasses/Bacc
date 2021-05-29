@@ -94,9 +94,9 @@ module.exports = {
             .setTimestamp()
             user.send(userEmbed)
 
-            const guildId = message.guild.id
-            const userId = user.id
-            const modlogs = {
+            const guildID = message.guild.id
+            const userID = user.id
+            const modlog = {
                 logtype: 'Unmute',
                 author: message.member.user.tag,
                 authorId: message.member.id,
@@ -109,14 +109,14 @@ module.exports = {
                 try {
                     await modlogsModel.findOneAndUpdate(
                         {
-                            guildId,
-                            userId,
+                            guildID,
+                            userID,
                         },
                         {
-                            guildId,
-                            userId,
+                            guildID,
+                            userID,
                             $push: {
-                                modLog: modlogs
+                                modlog: modlog
                             }
                         },
                         {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const afkModel = new mongoose.Model({
+const afkModel = new mongoose.Schema({
     guildID: String,
     userID: String,
     reason: String

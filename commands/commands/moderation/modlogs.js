@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js")
-const modlogsSchema = require("../../../schemas/modlogsSchema")
+const modlogsModel = require("../../../models/modlogsModel")
 const mongo = require("../../../utils/mongo")
 const config = require('../../../config.json')
 
@@ -19,25 +19,25 @@ module.exports = {
 
             if(!user){
                 const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} Please mention a member to see modlogs of!`)
+                .setDescription(`${config.emojis.no} Please specify a member to see modlogs of!`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                message.channel.send(embed).then((message) => {
+                return message.channel.send(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
                 })
             }
 
-            const guildId = message.guild.id
-            const userId = user.id
+            const guildID = message.guild.id
+            const userID = user.id
 
             await mongo().then(async(mongoose) => {
                 try {
-                    const result = await modlogsSchema.findOne({
-                        guildId,
-                        userId
+                    const result = await modlogsModel.findOne({
+                        guildID: guildID,
+                        userID: userID
                     })
                     if(!result){
                         const embed = new MessageEmbed()
@@ -46,10 +46,10 @@ module.exports = {
                         .setColor('RED')
                         .setFooter(config.botname)
                         .setTimestamp()
-                        message.channel.send(embed)
+                        return message.channel.send(embed)
                     }
-                    for(const log of result.modLog){
-                        const { logtype, author, authorId, moderator, timestamp, reason } = modLog
+                    for(const log of result.modlog){
+                        const { logtype, author, authorId, moderator, timestamp, reason } = modlog
                         let arr = []
                         arr.push(`**LogType:** ${logtype}\n**Author:** ${author} <@${authorId}>\n**Moderator:** ${moderator}\n**Date:** ${new Date(timestamp).toLocaleDateString()}\n**Reason:** ${reason}\n`)
                     

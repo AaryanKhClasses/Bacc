@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
 
-const modlogsModel = mongoose.Model({
-    guildId: {
+const modlogsModel = mongoose.Schema({
+    guildID: {
         type: String,
         required: true,
     },
-    userId: {
+    userID: {
         type: String,
         required: true,
     },
-    modLog: {
+    modlog: {
         type: [Object],
         required: true
     },

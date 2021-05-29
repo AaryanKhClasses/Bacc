@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('./config.json')
 require('dotenv').config()
+require('discord-buttons')(client)
 // const { Player } = require('discord-player')
 // const player = new Player(client)
 
