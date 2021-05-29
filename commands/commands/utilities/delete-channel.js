@@ -52,7 +52,7 @@ module.exports = {
                             timeout: 5000
                         })
                     })
-                    reply.message.delete()
+                    button.message.delete()
                     message.delete()
 
                     const logembed = new MessageEmbed()
