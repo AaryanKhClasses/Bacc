@@ -1,6 +1,6 @@
 const config = require('../../../config.json')
 const { MessageEmbed } = require('discord.js')
-const modlogsSchema = require("../../../schemas/modlogsSchema.js")
+const modlogsModel = require("../../../models/modlogsModel.js")
 const mongo = require('../../../utils/mongo.js')
 
 module.exports = {
@@ -107,7 +107,7 @@ module.exports = {
 
             await mongo().then(async(mongoose) => {
                 try {
-                    await modlogsSchema.findOneAndUpdate(
+                    await modlogsModel.findOneAndUpdate(
                         {
                             guildId,
                             userId,

@@ -1,7 +1,7 @@
 const config = require('../config.json')
 const { MessageEmbed } = require('discord.js')
-// const guildSchema = require('../schemas/blacklists/guildSchema')
-// const userSchema = require('../schemas/blacklists/userSchema')
+// const guildModel = require('../models/blacklists/guildModel')
+// const userModel = require('../models/blacklists/userModel')
 const premium = ['840494427595866142', '846372708694229012']
 let recentlyRan = []
 
@@ -51,24 +51,23 @@ module.exports = (client, commandOptions) => {
                     return
                 }
 
-                // const guildBlacklist = await guildSchema.findOne({ guildID: guild.id })
+                // const guildBlacklist = await guildModel.findOne({ guildID: guild.id })
                 // if(guildBlacklist) {
+                //     message.delete()
                 //     const embed = new MessageEmbed()
                 //     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
                 //     .setDescription(`${config.emojis.no} This server has been blacklisted by the bot owner! Contact <@${config.botOwner}> for help!\n**TIP:** Buy premium or [Fill Blacklist appeal](https://dsc.gg/bacc) to unblacklist the server!`)
                 //     .setColor('RED')
                 //     .setFooter(config.botname)
                 //     .setTimestamp()
-                //     message.channel.send(embed).then((message) => {
+                //     return message.channel.send(embed).then((message) => {
                 //         message.delete({
                 //             timeout: 5000
                 //         })
                 //     })
-                //     message.delete()
-                //     return
                 // }
 
-                // const userBlacklist = await userSchema.findOne({ userID: member.id })
+                // const userBlacklist = await userModel.findOne({ userID: member.id })
                 // if(userBlacklist) {
                 //     const embed = new MessageEmbed()
                 //     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())

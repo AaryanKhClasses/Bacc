@@ -11,13 +11,9 @@ commands/upcoming-commands-base.js
 commands/commands/moderation/modlogs.js
 commands/commands/moderation/warnings.js
 
-features
 supportServer
 
-schemas/countingSchema.js
-schemas/rolesSchema.js
-schemas/cooldownSchema.js
-schemas/blacklists
+models/blacklists
 
 commands/commands/dev-only 
 commands/commands/moderation/guildUserBlacklist.js

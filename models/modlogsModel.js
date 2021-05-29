@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const modlogsSchema = mongoose.Schema({
+const modlogsModel = mongoose.Model({
     guildId: {
         type: String,
         required: true,
@@ -16,4 +16,20 @@ const modlogsSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('modlogs', modlogsSchema)
+module.exports = mongoose.model('modlogs', modlogsModel)
+
+/*
+modlog: [
+    logtype
+    log no
+    user
+    userid
+    moderator
+    kickno
+    banno
+    muteno
+    warnno
+    reason
+    timestamp
+]
+*/

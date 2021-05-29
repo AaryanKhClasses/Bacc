@@ -1,4 +1,4 @@
-const afkSchema = require("../../schemas/afkSchema")
+const afkModel = require("../../models/afkModel")
 const { MessageEmbed } = require('discord.js')
 const config = require('../../config.json')
 
@@ -7,7 +7,7 @@ module.exports = (client) => {
         if(message.author.bot) return
         const mentioned = message.mentions.members.first()
         if(mentioned) {
-            const data = await afkSchema.findOne({ userID: mentioned.id })
+            const data = await afkModel.findOne({ userID: mentioned.id })
             if(data) {
                 const embed = new MessageEmbed()
                 .setColor('RED')
@@ -23,7 +23,7 @@ module.exports = (client) => {
             }
         }
         
-        const mainData = await afkSchema.findOne({ guildID: message.guild.id, userID: message.author.id })
+        const mainData = await afkModel.findOne({ guildID: message.guild.id, userID: message.author.id })
         if(mainData) {
             const embed = new MessageEmbed()
             .setColor('GREEN')

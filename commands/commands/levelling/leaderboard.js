@@ -31,7 +31,7 @@ module.exports = {
 
 /*
  => {
-        const board = levelSchema.findOne({ guildID: message.guild.id }, (data) => {
+        const board = levelModel.findOne({ guildID: message.guild.id }, (data) => {
             var limit = 10
 
             let lastPage = Math.ceil(Object.keys(data).length / limit)

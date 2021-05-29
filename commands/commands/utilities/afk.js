@@ -1,6 +1,6 @@
 const config = require('../../../config.json')
 const { MessageEmbed } = require('discord.js')
-const afkSchema = require('../../../schemas/afkSchema')
+const afkModel = require('../../../models/afkModel')
 
 module.exports = {
     commands: 'afk',
@@ -20,7 +20,7 @@ module.exports = {
             })
         }
 
-        const data = await afkSchema.findOne({ guildID: message.guild.id, userID: message.author.id })
+        const data = await afkModel.findOne({ guildID: message.guild.id, userID: message.author.id })
         if(!data) {
             const reason = args.slice(0).join(' ') || 'No Reason Specified!'
             const embed = new MessageEmbed()
@@ -34,14 +34,14 @@ module.exports = {
                     timeout: 5000
                 })
             })
-            const newAfk = new afkSchema({
+            const newAfk = new afkModel({
                 guildID: message.guild.id,
                 userID: message.author.id,
                 reason: reason
             })
             newAfk.save()
         } else if(data) {
-            await afkSchema.deleteOne({ guildID: message.guild.id, userID: message.author.id })
+            await afkModel.deleteOne({ guildID: message.guild.id, userID: message.author.id })
             const embed = new MessageEmbed()
             .setColor('GREEN')
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())

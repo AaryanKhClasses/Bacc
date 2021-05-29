@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
-const afkSchema = new mongoose.Schema({
+const afkModel = new mongoose.Model({
     guildID: String,
     userID: String,
     reason: String
 })
 
-module.exports = mongoose.model('afk', afkSchema)
+module.exports = mongoose.model('afk', afkModel)
