@@ -10,6 +10,8 @@ module.exports = (client, commandOptions) => {
         commands,
         cooldown = -1,
         callback,
+        devOnly = false,
+        ownerOnly = false
     } = commandOptions
 
     if(!commands){
@@ -31,6 +33,38 @@ module.exports = (client, commandOptions) => {
                 content.toLowerCase().startsWith(`${command}`) ||
                 content.toLowerCase() === command
             ){
+
+                if(ownerOnly == true && message.author.id !== message.guild.owner.id) {
+                    const embed = new MessageEmbed()
+                    .setColor('RED')
+                    .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                    .setFooter(config.botname)
+                    .setTimestamp()
+                    .setDescription(`${config.emojis.no} This is an \`OWNER-ONLY\` command!`)
+                    message.channel.send(embed).then((message) => {
+                        message.delete({
+                            timeout: 5000
+                        })
+                    })
+                    message.delete()
+                    return
+                }
+
+                if(devOnly == true && message.author.id !== config.botOwner) {
+                    const embed = new MessageEmbed()
+                    .setColor('RED')
+                    .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                    .setFooter(config.botname)
+                    .setTimestamp()
+                    .setDescription(`${config.emojis.no} This is an \`DEVELOPER-ONLY\` command!`)
+                    message.channel.send(embed).then((message) => {
+                        message.delete({
+                            timeout: 5000
+                        })
+                    })
+                    message.delete()
+                    return
+                }
 
                 let cooldownString = `${guild.id}-${member.id}-${commands[0]}`
                 console.log('cooldownString: ', cooldownString)
