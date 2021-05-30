@@ -28,7 +28,7 @@ module.exports = {
         message.channel.send({ embed: embed, buttons: [btn, btn2] })
 
         client.on('clickButton', async(button) => {
-            if(button.id === 'button1') {
+            if(button.id === 'button1') {// && button.clicker.id === message.author.id) {
                 const { body } = await superagent.get('https://aws.random.cat/meow')
                 const embed = new MessageEmbed()
                 .setColor('RANDOM')
@@ -38,7 +38,7 @@ module.exports = {
                 .setDescription(`Here's a cute little cat 😸!`)
                 .setImage(body.file)
                 button.message.edit({ embed: embed, buttons: [btn, btn2] })
-            } else if(button.id === 'button2') {
+            } else if(button.id === 'button2') { // && button.clicker.id === message.author.id) {
                 button.message.delete()
                 message.delete()
             }

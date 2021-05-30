@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const { Menu } = require('discord.js-menu')
+const { MessageButton } = require('discord-buttons')
 const config = require('../../config.json')
 const package = require('../../package.json')
 
@@ -23,14 +23,18 @@ module.exports = {
         .addFields(
             {
                 name: '🔼 Levelling:',
-                value: 'This bot has a levelling system and will give up xp every message you send!\n> You can check your levels and also compare yourselves in the leaderboard too!'
+                value: 'This bot has a levelling system and will give you xp every message you send!\n> You can check your levels and also compare yourselves in the leaderboard too!'
+            // },
+            // {
+            //     name: '💰 Economy:',
+            //     value: 'This bot has an economy system and will give you coins every message you send!\n> You can check your balance and also compare yourselves in the leaderboard too!'
             },
             {
                 name: '⚒ Moderation:',
                 value: 'This bot has a full moderation command system!\n> Commands like warn, mute, kick and ban are available!'
             },
             {
-                name: '🔮 Utility:',
+                name: '🛠 Utility:',
                 value: 'This bot has utility commands too!\n> Commands to make channels, set slowmode and some more are available!'
             },
             {
@@ -211,11 +215,11 @@ module.exports = {
             },
             {
                 name: '1️⃣ Role Commands:',
-                value: 'These are role-related utility commands! React to the 1️⃣ emoji to see the list of commands!'
+                value: 'These are role-related utility commands! Click on the `⚡ Roles` Button to see the list of commands!'
             },
             {
                 name: '2️⃣ Emote Commands:',
-                value: 'These are emoji-related utility commands! React to the 2️⃣ emoji to see the list of commands!'
+                value: 'These are emoji-related utility commands! Click on the `😀 Emotes` Button to see the list of commands!'
             },
             {
                 name: '➕ More Commands:',
@@ -308,7 +312,7 @@ module.exports = {
             },
             {
                 name: '🖼 Image-Related Commands:',
-                value: 'These are image related commands! React with 🖼 to see all the commands!'
+                value: 'These are image related commands! Click on the `🖼 Image` Button to see all the commands!'
             },
             {
                 name: '➕ More Commands:',
@@ -347,92 +351,44 @@ module.exports = {
             }
         )
 
+        const mainBtn = new MessageButton().setStyle('blurple').setID('mainbtn').setLabel('◀ Main')
+        const levelBtn = new MessageButton().setStyle('blurple').setID('lvlbtn').setLabel('🔼 Levelling')
+        // const economyBtn = new MessageButton().setStyle('blurple').setID('economybtn').setLabel('💰 Economy')
+        const modBtn = new MessageButton().setStyle('blurple').setID('modbtn').setLabel('⚒ Moderation')
+        const utilBtn = new MessageButton().setStyle('blurple').setID('utilbtn').setLabel('🛠 Utility')
+        const roleBtn = new MessageButton().setStyle('blurple').setID('rolebtn').setLabel('⚡ Roles')
+        const emoteBtn = new MessageButton().setStyle('blurple').setID('emotebtn').setLabel('😀 Emotes')
+        const funBtn = new MessageButton().setStyle('blurple').setID('funbtn').setLabel('🎈 Fun')
+        const imgBtn = new MessageButton().setStyle('blurple').setID('imgbtn').setLabel('🖼 Image')
+        const delBtn = new MessageButton().setStyle('red').setID('delbtn').setLabel('✖ Delete')
+    
+        message.channel.send({ embed: main, buttons: [levelBtn, modBtn, utilBtn, funBtn, delBtn] })
 
-        let helpMenu = new Menu(message.channel, message.author.id, [
-            {
-                name: 'main',
-                content: main,
-                reactions: {
-                    '🔼' : 'levelling',
-                    '⚒' : 'moderation',
-                    '🛠' : 'utility',
-                    '🎈' : 'fun',
-                    '842308687389130803' : 'delete'
+        client.on('clickButton', async(button) => {
+            // if(button.clicker.id === message.author.id) {
+                if(button.id === 'mainbtn') {
+                    button.message.edit({ embed: main, buttons: [levelBtn, modBtn, utilBtn, funBtn, delBtn] })
+                } else if(button.id === 'lvlbtn') {
+                    button.message.edit({ embed: levelling, buttons: [mainBtn, delBtn] }) 
+                // } else if(button.id === 'economybtn') {
+                //     button.message.edit({ embed: economy, buttons: [mainBtn, delBtn] })
+                } else if(button.id === 'modbtn') {
+                    button.message.edit({ embed: moderation, buttons: [mainBtn, delBtn] })
+                } else if(button.id === 'utilbtn') {
+                    button.message.edit({ embed: utility, buttons: [mainBtn, roleBtn, emoteBtn, delBtn] })
+                } else if(button.id === 'rolebtn') {
+                    button.message.edit({ embed: roles, buttons: [mainBtn, utilBtn, delBtn] })
+                } else if(button.id === 'emotebtn') {
+                    button.message.edit({ embed: emotes, buttons: [mainBtn, utilBtn, delBtn] })
+                } else if(button.id === 'funbtn') {
+                    button.message.edit({ embed: fun, buttons: [mainBtn, imgBtn, delBtn] })
+                } else if(button.id === 'imgbtn') {
+                    button.message.edit({ embed: image, buttons: [mainBtn, funBtn, delBtn] })
+                } else if(button.id === 'delbtn') {
+                    button.message.delete()
+                    message.delete()
                 }
-            },
-            {
-                name: 'levelling',
-                content: levelling,
-                reactions: {
-                    '◀' : 'main',
-                    '842308687389130803' : 'delete'
-                    
-                }
-            },
-            {
-                name: 'economy',
-                content: economy,
-                reactions: {
-                    '◀' : 'main',
-                    '842308687389130803' : 'delete'
-                }
-            },
-            {
-                name: 'moderation',
-                content: moderation,
-                reactions: {
-                    '◀' : 'main',
-                    '842308687389130803' : 'delete'
-                    
-                } 
-            },
-            {
-                name: 'utility',
-                content: utility,
-                reactions: {
-                    '◀' : 'main',
-                    '1️⃣' : 'roles',
-                    '2️⃣' : 'emotes',
-                    '842308687389130803' : 'delete'
-                }
-            },
-            {
-                name: 'roles',
-                content: roles,
-                reactions: {
-                    '⏮' : 'main',
-                    '◀' : 'utility',
-                    '842308687389130803' : 'delete'
-                }
-            },
-            {
-                name: 'emotes',
-                content: emotes,
-                reactions: {
-                    '⏮' : 'main',
-                    '◀' : 'utility',
-                    '842308687389130803' : 'delete'
-                }
-            },
-            {
-                name: 'fun',
-                content: fun,
-                reactions: {
-                    '◀' : 'main',
-                    '🖼' : 'image',
-                    '842308687389130803' : 'delete'
-                }
-            },
-            {
-                name: 'image',
-                content: image,
-                reactions: {
-                    '⏮' : 'main',
-                    '◀' : 'fun',
-                    '842308687389130803' : 'delete'
-                }
-            }
-        ])
-        helpMenu.start()
+            // }
+        })
     }
 }

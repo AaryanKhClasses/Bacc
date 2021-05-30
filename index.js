@@ -14,6 +14,8 @@ const loadModules = require('./modules/load-modules.js')
 // const loadFeatures = require('./features/load-features.js')
 
 // client.player = player
+client.queue = new Map()
+client.vote = new Map()
 
 client.on('ready', () => {
     console.log('The Bot is Online!')

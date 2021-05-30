@@ -39,7 +39,7 @@ module.exports = {
             message.channel.send({ embed: aembed, buttons: [btn, btn2] })
 
             client.on('clickButton', async(button) => {
-                if(button.id === 'button1') {
+                if(button.id === 'button1') { // && button.clicker.id === message.author.id) {
                     Channel.delete()
                     const embed = new MessageEmbed()
                     .setAuthor(`${button.message.author.tag}`, button.message.author.displayAvatarURL())
@@ -75,7 +75,7 @@ module.exports = {
                         }
                     )
                     channel.send(logembed)
-                } else if(button.id === 'button2') {
+                } else if(button.id === 'button2') {// && button.clicker.id === message.author.id) {
                     message.delete()
                     button.message.delete()
                 }

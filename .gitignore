@@ -17,3 +17,5 @@ models/blacklists
 
 commands/commands/dev-only 
 commands/commands/moderation/guildUserBlacklist.js
+
+utils

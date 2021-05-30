@@ -30,7 +30,7 @@ module.exports = {
         })
 
         client.on('clickButton', async(button) => {
-            if(button.id === 'button1') {
+            if(button.id === 'button1') { // && button.clicker.id === message.author.id) {
                 got('https://www.reddit.com/r/meme/random.json').then((response) => {
                     const content = JSON.parse(response.body)
                     const image = content[0].data.children[0].data.url
@@ -42,7 +42,7 @@ module.exports = {
                     .setTimestamp()
                     button.message.edit({ embed : embed, buttons: [btn, btn2] })
                 })
-            } else if(button.id === 'button2') {
+            } else if(button.id === 'button2') { // && button.clicker.id === message.author.id) {
                 button.message.delete()
                 message.delete()
             }
