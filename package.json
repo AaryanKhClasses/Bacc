@@ -1,6 +1,6 @@
 {
   "name": "Bacc",
-  "version": "1.0.4-BETA4",
+  "version": "1.0.5-BETA1",
   "description": "A multipurpose and a fully customisable discord bot!",
   "main": "index.js",
   "scripts": {
