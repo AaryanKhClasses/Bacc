@@ -3,8 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = (client) => {
     client.on('guildMemberRemove', async(member) => {
-        const joinLogs = member.guild.channels.cache.find(ch => ch.name.includes('join-logs'))
-        const { guild } = member
+        const joinLogs = member.guild.channels.cache.find(ch => ch.name.includes('join-logs')).id
         if(!joinLogs){
             return
         }else if(joinLogs){
@@ -16,7 +15,7 @@ module.exports = (client) => {
             .setColor('RED')
             .setFooter(config.botname)
             .setTimestamp()
-            guild.channels.cache.get(joinLogs).send(embed)
+            member.guild.channels.cache.get(joinLogs).send(embed)
         }
     })
 }

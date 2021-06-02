@@ -25,10 +25,9 @@ module.exports = (client) => {
 
 
     client.on('guildMemberAdd', async(member) => {
-        const joinLogs = member.guild.channels.cache.find(ch => ch.name.includes('join-logs'))
-        const welcome = member.guild.channels.cache.find(ch => ch.name.includes('welcome'))
-        const rulesChannel = member.guild.channels.cache.find(ch => ch.name.includes('rules')).id || member.guild.channels.cache.find(ch => ch.name.includes('info')).id
-        const { guild } = member
+        const joinLogs = member.guild.channels.cache.find(ch => ch.name.includes('join-logs')).id
+        const welcome = member.guild.channels.cache.find(ch => ch.name.includes('welcome')).id
+        const rulesChannel = member.guild.channels.cache.find(ch => ch.name.includes('rules')) || member.guild.channels.cache.find(ch => ch.name.includes('info'))
         if(!joinLogs){
             return
         }else if(joinLogs){
@@ -40,28 +39,27 @@ module.exports = (client) => {
             .setColor('GREEN')
             .setFooter(config.botname)
             .setTimestamp()
-            guild.channels.cache.get(joinLogs).send(embed)
+            member.guild.channels.cache.get(joinLogs).send(embed)
         }
 
         if(!welcome){
             return
         } else if(welcome){
-            const { guild, id } = member
-            const invitesBefore = invites[guild.id]
-            const invitesAfter = await getInviteCounts(guild)
+            const invitesBefore = invites[member.guild.id]
+            const invitesAfter = await getInviteCounts(member.guild)
 
             for(const inviter in invitesAfter) {
                 if(invitesBefore[inviter] === invitesAfter[inviter] - 1) {
                     const count = invitesAfter[inviter]
                     const embed = new MessageEmbed()
-                    .setDescription(`Welcome to **${member.guild.name}**, <@!${member.user.id}> Please read the rules of the server in <#${rulesChannel}>!\n Thanks to ${inviter} for inviting them! They now have ${count} invites!`)
+                    .setDescription(`Welcome to **${member.guild.name}**, <@!${member.user.id}> Please read the rules of the server in ${rulesChannel}!\n Thanks to ${inviter} for inviting them! They now have ${count} invites!`)
                     .setAuthor(`${member.user.tag}`, member.user.displayAvatarURL())
                     .setColor('GREEN')
                     .setFooter(config.botname)
                     .setTimestamp()
-                    guild.channels.cache.get(welcome).send(embed)
+                    member.guild.channels.cache.get(welcome).send(embed)
 
-                    invites[guild.id] = invitesAfter
+                    invites[member.guild.id] = invitesAfter
                     return
                 }
             }

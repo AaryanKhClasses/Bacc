@@ -20,3 +20,10 @@ commands/commands/moderation/guildUserBlacklist.js
 
 utils
 modules
+
+//
+index.js
+commands
+models
+commands/a.js
+images
