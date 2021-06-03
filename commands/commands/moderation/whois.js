@@ -20,13 +20,13 @@ module.exports = {
         }   
 
         let permlevel
-        if(target.hasPermission("SEND_MESSAGES")) permlevel = '0 (Normal Member)'
-        if(target.hasPermission("MANAGE_MESSAGES")) permlevel = '1 (Helper)'
-        if(target.hasPermission("BAN_MEMBERS")) permlevel = '2 (Moderator)'
-        if(target.hasPermission("MANAGE_GUILD")) permlevel = '3 (Administrator)'
-        if(target.roles.cache.find(r => r.name.includes('Trusted'))) permlevel = '4 (Trusted Admin)'
-        if(target.id === message.guild.ownerID) permlevel = '5 (Server Owner)'
-        if(target.id === config.botOwner) permlevel = '6 (Bot Owner)'
+        if(target.hasPermission("SEND_MESSAGES")) permlevel = `${config.emojis.user} Normal Member`
+        if(target.hasPermission("MANAGE_MESSAGES")) permlevel = `${config.emojis.info} Helper`
+        if(target.hasPermission("BAN_MEMBERS")) permlevel = `${config.emojis.mod} Moderator`
+        if(target.hasPermission("MANAGE_GUILD")) permlevel = `${config.emojis.admin} Administrator`
+        if(target.roles.cache.find(r => r.name.includes(`Trusted`))) permlevel = `${config.emojis.manage} Trusted Admin`
+        if(target.id === message.guild.ownerID) permlevel = `${config.emojis.star} Server Owner`
+        if(target.id === config.botOwner) permlevel = `${config.emojis.copyright} Bot Owner`
         
         let isBot
         if(target.user.bot === true) {
