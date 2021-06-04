@@ -5,6 +5,9 @@ const config = require('../../../config.json')
 module.exports = {
     commands: ['leaderboard', 'lb'],
     cooldown: 10,
+    description: 'Shows the XP Leaderboardof the top 10 members!',
+    usage: '!leaderboard',
+    permLevel: 0,
     callback: async(client, message, args) => {
         const rawleaderboard = await levelling.fetchXpLeaderboard(message.guild.id, 10)
         if(rawleaderboard.length < 1) {

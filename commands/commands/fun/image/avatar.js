@@ -3,6 +3,9 @@ const config = require('../../../../config.json')
 
 module.exports = {
     commands: 'avatar',
+    description: 'Sends the avatar of the specified member',
+    usage: '!avatar (optional member)',
+    permLevel: 0,
     cooldown: 10,
     callback: async(client, message, args) => {
         let user

@@ -4,6 +4,9 @@ const { economy } = require('bacclib')
 
 module.exports = {
     commands: ['bal', 'balance'],
+    description: 'Check the balance of the specified user!',
+    usage: '!bal (optional member)',
+    permLevel: 0,
     cooldown: 10,
     callback: async(client, message, args) => {
         let target

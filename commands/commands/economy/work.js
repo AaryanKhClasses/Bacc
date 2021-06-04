@@ -5,6 +5,9 @@ const { work } = require('./replies.json')
 
 module.exports = {
     commands: 'work',
+    description: `Work to earn coins!\n${config.emojis.blank} **NOTE:** This command is going to be changed to a better version!`,
+    permLevel: 0,
+    usage: '!work',
     cooldown: 43200, //12hrs
     callback: (client, message, args) => {
         let min = 250

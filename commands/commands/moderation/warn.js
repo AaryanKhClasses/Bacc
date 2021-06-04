@@ -6,6 +6,9 @@ const mongo = require("../../../utils/mongo")
 module.exports = {
     commands: 'warn',
     cooldown: 10,
+    description: 'Warns the specified member! Requires the `Manage Messages` Permission!',
+    usage: '!kick [member] (optional reason)',
+    permLevel: 1,
     callback: async(client, message, args) => {
         if(message.content.startsWith("!warnings")){
             return

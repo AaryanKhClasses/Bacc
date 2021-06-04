@@ -5,6 +5,9 @@ const mongo = require('../../../utils/mongo.js')
 
 module.exports = {
     commands: 'kick',
+    description: 'Kicks the specified member! Requires the `Kick Members` Permission!',
+    usage: '!kick [member] (optional reason)',
+    permLevel: 2,
     cooldown: 10,
     callback: async(client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id

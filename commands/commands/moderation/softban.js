@@ -6,6 +6,9 @@ const mongo = require('../../../utils/mongo.js')
 module.exports = {
     commands: 'softban',
     cooldown: 10,
+    description: 'Soft-bans the specified member! Requires the `Ban Members` Permission!',
+    usage: '!softban [member] (optional reason)',
+    permLevel: 2,
     callback: async(client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)

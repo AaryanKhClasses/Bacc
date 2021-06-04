@@ -7,6 +7,9 @@ const package = require(`../../package.json`)
 module.exports = {
     commands: `help`,
     cooldown: 10,
+    description: 'Shows the help menu!',
+    usage: '!help',
+    permLevel: 0,
     callback: (client, message, args) => {
         const main = new MessageEmbed() 
         .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())

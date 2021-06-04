@@ -5,6 +5,9 @@ const got = require('got')
 
 module.exports = {
     commands: 'meme',
+    description: 'Sends a random meme from the subreddit `r/meme`',
+    usage: '!meme',
+    permLevel: 0,
     cooldown: 10,
     callback: (client, message, args) => {
         const btn = new MessageButton()

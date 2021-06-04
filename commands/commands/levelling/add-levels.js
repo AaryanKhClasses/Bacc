@@ -5,6 +5,9 @@ const { levelling } = require('bacclib')
 module.exports = {
     commands: 'add-levels',
     cooldown: 10,
+    description: 'Add Levels to the specified member!',
+    usage: '!add-levels [member] [number of levels]',
+    permLevel: 3,
     callback: (client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)

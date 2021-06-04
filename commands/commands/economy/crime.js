@@ -5,6 +5,9 @@ const { crimeFailures, crimeSuccess } = require('./replies.json')
 
 module.exports = {
     commands: 'crime',
+    description: 'Do crime to earn coins!',
+    permLevel: 0,
+    usage: '!crime',
     cooldown: 43200, //12hrs
     callback: (client, message, args) => {
         let successMin = 300

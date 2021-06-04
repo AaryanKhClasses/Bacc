@@ -8,21 +8,18 @@ commands/commands/economy/daily.js
 commands/commands/music
 commands/upcoming-commands-base.js
 
-commands/commands/moderation/modlogs.js
-commands/commands/moderation/warnings.js
-
 supportServer
 
 models/blacklists
 
 commands/commands/dev-only 
-commands/commands/moderation/guildUserBlacklist.js
 
 utils
 modules
 
 //
 index.js
-commands
 models
 commands/a.js
+commands/commands/customisation
+commands/commands/moderation

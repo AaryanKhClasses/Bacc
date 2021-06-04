@@ -5,6 +5,9 @@ const { levelling } = require('bacclib')
 module.exports = {
     commands: 'remove-xp',
     cooldown: 10,
+    description: 'Removes XP from the specified member!',
+    usage: '!remove-xp [member] [number of xp]',
+    permLevel: 3,
     callback: (client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)

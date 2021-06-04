@@ -4,6 +4,9 @@ const translate = require('@iamtraction/google-translate')
 
 module.exports = {
     commands: 'translate',
+    description: 'Translate the specified text to a specified langauge',
+    usage: '!translate [language name] [text to translate]',
+    permLevel: 0,
     cooldown: 10,
     callback: (client, message, args) => {
         const text = args.slice(1).join(' ')
@@ -13,9 +16,9 @@ module.exports = {
             .setTitle(`${message.author.tag}`, message.author.displayAvatarURL())
             .setColor('GREEN')
             .setDescription(
-                `**Translate to:** ${language}\n` +
-                `**Original Text:** ${text}\n` +
-                `**Translated Text:** ${res.text}`
+                `${config.emojis.badge} **Translate to:** ${language}\n` +
+                `${config.emojis.arrowRight} **Original Text:** ${text}\n` +
+                `${config.emojis.translate} **Translated Text:** ${res.text}`
             )
             .setFooter(config.botname)
             .setTimestamp()

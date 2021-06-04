@@ -6,6 +6,9 @@ const canvacord = require('canvacord')
 module.exports = {
     commands: ['rank', 'level'],
     cooldown: 10,
+    description: 'Shows the rank of the specified member!',
+    usage: '!rank (optional member)',
+    permLevel: 0,
     callback: async(client, message, args) => {
         let target
         if(message.mentions.users.first()) {

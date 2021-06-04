@@ -1,14 +1,17 @@
 const { MessageButton } = require("discord-buttons")
 const { MessageEmbed } = require("discord.js")
+const { Menu } = require('discord.js-menu')
 const config = require('../../../config.json')
 
 module.exports = {
     commands: ['whois', 'userinfo'],
+    description: 'Sends the userinfo of the specified member!',
     cooldown: 10,
+    permLevel: 0,
     callback: (client, message, args) => {
-        const btn1 = new MessageButton().setID('main').setLabel('◀ General Info').setStyle('blurple')
-        const btn2 = new MessageButton().setID('user').setLabel('▶ Member Info').setStyle('blurple')
-        const del = new MessageButton().setID('del').setLabel('✖ Delete').setStyle('red')
+        // const btn1 = new MessageButton().setID('main').setLabel('◀ General Info').setStyle('blurple')
+        // const btn2 = new MessageButton().setID('user').setLabel('▶ Member Info').setStyle('blurple')
+        // const del = new MessageButton().setID('del').setLabel('✖ Delete').setStyle('red')
 
         let target
         if(message.mentions.members.first()){
@@ -91,21 +94,42 @@ module.exports = {
             `${config.emojis.blank}${config.emojis.join} **Joining Date:** ${new Date(target.joinedTimestamp).toLocaleDateString()}\n` +
             `${config.emojis.blank}${config.emojis.nav} **Permission Level:** ${permlevel}\n`
         )
-        .addField(`${config.emojis.badge1} Roles:`, str)
+        .addField(`${config.emojis.badge1} Roles:`, str || 'No Roles')
         .addField(`${config.emojis.perms} Permissions:`, perms)
 
             
-        message.channel.send({ embed: embed1, buttons: [btn2, del] })
+        // message.channel.send({ embed: embed1, buttons: [btn2, del] })
 
-        client.on('clickButton', async(button) => {
-            if(button.id === 'main') {
-                button.message.edit({ embed: embed1, buttons: [btn2, del] })
-            } else if(button.id === 'user') {
-                button.message.edit({ embed: embed2, buttons: [btn1, del] })
-            } else if(button.id === 'del') {
-                button.message.delete()
-                message.delete()
+        // client.on('clickButton', async(button) => {
+        //     if(button.id === 'main') {
+        //         button.message.edit({ embed: embed1, buttons: [btn2, del] })
+        //     } else if(button.id === 'user') {
+        //         button.message.edit({ embed: embed2, buttons: [btn1, del] })
+        //     } else if(button.id === 'del') {
+        //         button.message.delete()
+        //         message.delete()
+        //     }
+        // })
+
+        const menu1 = new Menu(message.channel, message.author.id, [
+            {
+                name: 'general',
+                content: embed1,
+                reactions: {
+                    '849591003417542686' : 'member',
+                    '849572880596860988' : 'delete'
+                }
+            },
+            {
+                name: 'member',
+                content: embed2,
+                reactions: {
+                    '849572880564224040' : 'general',
+                    '849572880596860988' : 'delete'
+                }
             }
-        })
+        ])
+
+        menu1.start()
     }
 }

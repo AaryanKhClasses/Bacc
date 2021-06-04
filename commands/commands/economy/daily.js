@@ -4,7 +4,8 @@ const { economy, economyModel } = require('bacclib')
 
 module.exports = {
     commands: 'daily',
-    cooldown: 86400, 
+    cooldown: 86400,
+    permLevel: 0,
     callback: async(client, message, args) => {
         let min = 500
         let max = 1500

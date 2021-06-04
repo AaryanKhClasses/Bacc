@@ -3,6 +3,9 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: ['color', 'hexcolor'],
+    description: 'Sends the color you specified into an embed!',
+    permLevel: 0,
+    usage: '!color [color hex or name]',
     cooldown: 10,
     callback: (client, message, args) => {
         if(!args[0]) {
@@ -11,12 +14,12 @@ module.exports = {
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
             .setFooter(config.botname)
             .setTimestamp()
-            .setDescription(`${config.emojis.no} Please specify a color name (in caps, like GREEN) or an hex color!`)
+            .setDescription(`${config.emojis.no} Please specify a color name or an hex color!`)
             return message.channel.send(embed)
         }
 
         const embed = new MessageEmbed()
-        .setColor(args[0])
+        .setColor(args[0].toUpperCase())
         .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
         .setFooter(config.botname)
         .setTimestamp()

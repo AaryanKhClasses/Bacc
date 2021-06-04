@@ -5,6 +5,9 @@ const superagent = require('superagent')
 
 module.exports = {
     commands: 'dog',
+    description: 'Sends a random cute dog image!',
+    permLevel: 0,
+    usage: '!dog',
     cooldown: 10,
     callback: async(client, message, args) => {
         const btn = new MessageButton()

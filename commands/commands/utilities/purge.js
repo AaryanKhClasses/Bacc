@@ -3,6 +3,8 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'purge',
+    description: 'Purges(or clears) the specified amount of messages!',
+    usage: '!purge [number of messages]',
     cooldown: 5,
     callback: (client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
