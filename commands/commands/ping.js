@@ -2,6 +2,7 @@ module.exports = {
     commands: 'ping',
     description: 'Sends the ping of the bot!',
     usage: '!ping',
+    permLevel: 0,
     cooldown: 6,
     callback: (client, message, args) => {
         message.channel.send('Pong!').then((resultMessage) => {
