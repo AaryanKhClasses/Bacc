@@ -28,7 +28,7 @@ module.exports = {
         .setTimestamp()
         .setDescription(`Here's a cute little dog 🐶!`)
         .setImage(body.url)
-        message.channel.send({ embed : embed, buttons: [btn, btn2] })
+        message.lineReply({ embed : embed, buttons: [btn, btn2] })
 
         client.on('clickButton', async(button) => {
             if(button.id === 'button1') { // && button.clicker.id === message.author.id) {

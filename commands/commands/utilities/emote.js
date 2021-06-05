@@ -27,7 +27,7 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully added emoji: :${args[2]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.channel.send(embed).then((message) => {
+                    message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -61,7 +61,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.channel.send(embed).then((message) => {
+                return message.lineReply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -77,7 +77,7 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully deleted emoji: :${args[1]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.channel.send(embed).then((message) => {
+                    message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -111,7 +111,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.channel.send(embed).then((message) => {
+                return message.lineReply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -126,7 +126,7 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully renamed emoji from :${args[1]}: to :${args[2]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.channel.send(embed).then((message) => {
+                    message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -164,7 +164,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.channel.send(embed).then((message) => {
+                return message.lineReply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -195,7 +195,7 @@ module.exports = {
                 )
             .setFooter(config.botname)
             .setTimestamp()
-            message.channel.send(embed)
+            message.lineReply(embed)
 
         }
     }

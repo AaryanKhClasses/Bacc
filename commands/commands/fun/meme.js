@@ -29,7 +29,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setImage(image)
                 .setTimestamp()
-            message.channel.send({ embed : embed, buttons: [btn, btn2] })
+            message.lineReply({ embed : embed, buttons: [btn, btn2] })
         })
 
         client.on('clickButton', async(button) => {

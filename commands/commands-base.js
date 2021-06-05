@@ -61,7 +61,7 @@ module.exports = (client, commandOptions) => {
                     .setFooter(config.botname)
                     .setTimestamp()
                     .setDescription(`${config.emojis.no} This is an \`OWNER-ONLY\` command!`)
-                    message.channel.send(embed).then((message) => {
+                    message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -76,8 +76,8 @@ module.exports = (client, commandOptions) => {
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
                     .setFooter(config.botname)
                     .setTimestamp()
-                    .setDescription(`${config.emojis.no} This is an \`PREMIUM-ONLY\` command!`)
-                    message.channel.send(embed).then((message) => {
+                    .setDescription(`${config.emojis.no} This is an \`DEVELOPER-ONLY\` command!`)
+                    message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -92,8 +92,8 @@ module.exports = (client, commandOptions) => {
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
                     .setFooter(config.botname)
                     .setTimestamp()
-                    .setDescription(`${config.emojis.no} This is an \`DEVELOPER-ONLY\` command!`)
-                    message.channel.send(embed).then((message) => {
+                    .setDescription(`${config.emojis.no} This is an \`PREMIUM-ONLY\` command!`)
+                    message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -115,7 +115,7 @@ module.exports = (client, commandOptions) => {
                         `${str2}`+
                         `${config.emojis.arrowRight} **Usage:** ${usage}`
                     )
-                    return message.channel.send(embed)
+                    return message.lineReply(embed)
                 }
 
                 let cooldownString = `${guild.id}-${member.id}-${commands[0]}`
@@ -128,7 +128,7 @@ module.exports = (client, commandOptions) => {
                     .setColor('RED')
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.channel.send(embed).then((message) => {
+                    message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -146,7 +146,7 @@ module.exports = (client, commandOptions) => {
                 //     .setColor('RED')
                 //     .setFooter(config.botname)
                 //     .setTimestamp()
-                //     return message.channel.send(embed).then((message) => {
+                //     return message.lineReply(embed).then((message) => {
                 //         message.delete({
                 //             timeout: 5000
                 //         })
@@ -161,7 +161,7 @@ module.exports = (client, commandOptions) => {
                 //     .setColor('RED')
                 //     .setFooter(config.botname)
                 //     .setTimestamp()
-                //     message.channel.send(embed).then((message) => {
+                //     message.lineReply(embed).then((message) => {
                 //         message.delete({
                 //             timeout: 5000
                 //         })

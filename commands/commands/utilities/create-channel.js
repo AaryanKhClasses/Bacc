@@ -24,7 +24,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.channel.send(embed).then((message) => {
+                return message.lineReply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -38,7 +38,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.channel.send(embed).then((message) => {
+                return message.lineReply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -52,7 +52,7 @@ module.exports = {
             .setFooter(config.botname)
             .setColor('GREEN')
             .setTimestamp()
-            message.channel.send(embed).then((message) => {
+            message.lineReply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
@@ -96,7 +96,7 @@ module.exports = {
             .setColor('RED')
             .setFooter(config.botname)
             .setTimestamp()
-            return message.channel.send(embed).then((message) => {
+            return message.lineReply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })

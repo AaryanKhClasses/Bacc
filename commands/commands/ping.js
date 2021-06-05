@@ -28,7 +28,7 @@ module.exports = {
         .setTimestamp()
         .setDescription(`Pinging...`)
 
-        message.channel.send(embed).then((resultMessage) => {
+        message.lineReply(embed).then((resultMessage) => {
             const ping = resultMessage.createdTimestamp - message.createdTimestamp
             const embed2 = new MessageEmbed()
             .setColor('BLUE')

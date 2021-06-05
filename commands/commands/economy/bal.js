@@ -25,6 +25,6 @@ module.exports = {
         .setFooter(config.botname)
         .setTimestamp()
         .setDescription(`${config.emojis.currency} **Balance for <@${target.id}>:** ${user.coins} `)
-        message.channel.send(embed)
+        message.lineReply(embed)
     }
 }

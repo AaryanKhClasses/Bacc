@@ -366,7 +366,7 @@ module.exports = {
         // const imgBtn = new MessageButton().setStyle('blurple').setID('imgbtn').setLabel('🖼 Image')
         // const delBtn = new MessageButton().setStyle('red').setID('delbtn').setLabel('✖ Delete')
     
-        // message.channel.send({ embed: main, buttons: [levelBtn, modBtn, utilBtn, funBtn, delBtn] })
+        // message.lineReply({ embed: main, buttons: [levelBtn, modBtn, utilBtn, funBtn, delBtn] })
 
         // client.on('clickButton', async(button) => {
         //     // if(button.clicker.id === message.author.id) {

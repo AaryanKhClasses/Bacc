@@ -49,6 +49,6 @@ module.exports = {
             `${config.emojis.blank} ${config.emojis.system} **System Messages Channel:** ${guild.systemChannel}\n` +
             `${config.emojis.blank} ${config.emojis.description} **Server Description:** ${guild.description || 'No Server Description!'}`
         )
-        message.channel.send(embed)
+        message.lineReply(embed)
     }
 }

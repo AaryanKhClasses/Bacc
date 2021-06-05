@@ -27,7 +27,7 @@ module.exports = {
             .setDescription(`${config.emojis.yes} ${crimeSuccess[Math.floor(Math.random() * crimeSuccess.length)]} You got ${config.emojis.currency} ${successAmount}`)
             .setFooter(config.botname)
             .setTimestamp()    
-            return message.channel.send(embed)
+            return message.lineReply(embed)
         }
         if(random >= 4.5) {
             economy.subtractCoins(message.author.id, message.guild.id, failureAmount)
@@ -37,7 +37,7 @@ module.exports = {
             .setDescription(`${config.emojis.yes} ${crimeFailures[Math.floor(Math.random() * crimeFailures.length)]} You lost ${config.emojis.currency} ${failureAmount}`)
             .setFooter(config.botname)
             .setTimestamp()    
-            return message.channel.send(embed)
+            return message.lineReply(embed)
         }
         
     }

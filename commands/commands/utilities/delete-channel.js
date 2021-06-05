@@ -39,7 +39,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`Are you sure that you want to delete the channel ${Channel}?`)
-            message.channel.send({ embed: aembed, buttons: [btn, btn2] })
+            message.lineReply({ embed: aembed, buttons: [btn, btn2] })
 
             client.on('clickButton', async(button) => {
                 if(button.id === 'button1') { // && button.clicker.id === message.author.id) {
@@ -50,7 +50,7 @@ module.exports = {
                     .setFooter(config.botname)
                     .setColor('GREEN')
                     .setTimestamp()
-                    button.message.channel.send(embed).then((message) => {
+                    button.message.lineReply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -89,7 +89,7 @@ module.exports = {
             .setColor('RED')
             .setFooter(config.botname)
             .setTimestamp()
-            return message.channel.send(embed).then((message) => {
+            return message.lineReply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
