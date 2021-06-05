@@ -3,6 +3,9 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'addrole',
+    description: 'Adds a role to the server!',
+    usage: '!addrole [position] [color] [hoisted?] [mentionable?] [role name]',
+    permLevel: 2,
     cooldown: 10,
     callback: (client, message, args) => { 
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
@@ -35,10 +38,10 @@ module.exports = {
 
             let color
             if(args[1]) {
-                color = args[1]
+                color = args[1].toUpperCase()
             } else {
                 color = '#00000'
-                args[1] = color
+                args[1].toUpperCase() = color
             }
 
             let hoisted

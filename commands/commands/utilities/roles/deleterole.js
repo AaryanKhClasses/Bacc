@@ -3,6 +3,9 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'deleterole',
+    description: 'Deletes a role from the server!',
+    usage: '!deleterole [role]',
+    permLevel: 2,
     cooldown: 10,
     callback: (client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id

@@ -2,11 +2,11 @@ const config = require('../../config.json')
 const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-    commands: 'ping',
-    description: 'Sends the ping of the bot!',
-    usage: '!ping',
+    commands: 'uptime',
+    cooldown: 10,
+    description: 'Sends the uptime of the bot',
+    usage: '!uptime',
     permLevel: 0,
-    cooldown: 6,
     callback: (client, message, args) => {
         var milliseconds = parseInt((client.uptime % 1000) / 100),
             seconds = parseInt((client.uptime / 1000) % 60),
@@ -22,26 +22,23 @@ module.exports = {
         const str = `${days} days, ${hours} hours, ${minutes} minutes ${seconds} seconds`
 
         const embed = new MessageEmbed()
-        .setColor('BLUE')
+        .setColor('GREEN')
         .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
         .setFooter(config.botname)
         .setTimestamp()
-        .setDescription(`Pinging...`)
-
+        .setDescription('Getting uptime...')
         message.channel.send(embed).then((resultMessage) => {
             const ping = resultMessage.createdTimestamp - message.createdTimestamp
-            const embed2 = new MessageEmbed()
-            .setColor('BLUE')
+            const embed = new MessageEmbed()
+            .setColor('GREEN')
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(
                 `${config.emojis.arrowRight} **API Latency:** \`${ping}ms\`\n` + 
-                `${config.emojis.slowmode} **Uptime:** \`${str}\`\n` +
-                `${config.emojis.user} **Total Users:** \`${client.users.cache.size} Users\`\n` + 
-                `${config.emojis.group} **Total Servers:** \`${client.guilds.cache.size} Servers\``
-            )    
-            resultMessage.edit(embed2)
-        })
+                `${config.emojis.slowmode} **Uptime:** \`${str}\`\n`
+            )
+            resultMessage.edit(embed)
+        }) 
     }
 }

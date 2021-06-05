@@ -3,6 +3,17 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'emote',
+    description: 'Emote related commands:\n' +
+    `${config.emojis.blank} ${config.emojis.add} **Add-Emote:** Adds an emoji to the server\n` +
+    `${config.emojis.blank} ${config.emojis.no} **Delete-Emote:** Deletes an emoji from the server\n` +
+    `${config.emojis.blank} ${config.emojis.rename} **Rename-Emote:** Renames an emoji\n` +
+    `${config.emojis.blank} ${config.emojis.analytics} **Emote-Stats:** Shows the emoji stats of the server`,
+    usage: 'The usages of the emoji commands are:\n' +
+    `${config.emojis.blank} ${config.emojis.add} **Add-Emote:** !emote add [emoji link] [emoji name]\n` +
+    `${config.emojis.blank} ${config.emojis.no} **Delete-Emote:** !emote delete [emoji name]\n` +
+    `${config.emojis.blank} ${config.emojis.rename} **Rename-Emote:** !emote rename [old emoji] [new emoji]\n` +
+    `${config.emojis.blank} ${config.emojis.analytics} **Emote-Stats:** !emote stats`,
+    permLevel: 2,
     cooldown: 10,
     callback: (client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id

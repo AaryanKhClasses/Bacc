@@ -5,6 +5,10 @@ const ms = require('ms')
 module.exports = {
     commands: 'slowmode',
     cooldown: 5,
+    description: 'Sets the slowmode of the channel!',
+    usage: '!slowmode [duration]',
+    permLevel: 2,
+    premiumOnly: true,
     callback: (client, message, args) => {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)

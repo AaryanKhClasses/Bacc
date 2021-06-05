@@ -14,7 +14,8 @@ module.exports = (client, commandOptions) => {
         ownerOnly = false,
         description,
         usage,
-        permLevel
+        permLevel,
+        premiumOnly
     } = commandOptions
 
     if(!commands){
@@ -40,6 +41,10 @@ module.exports = (client, commandOptions) => {
         if(permLevel === 4) str = `${config.emojis.manage} **Permission Level:** Trusted Admin`
         if(permLevel === 5) str = `${config.emojis.star} **Permission Level:** Server Owner`
         if(permLevel === 6) str = `${config.emojis.copyright} **Permission Level:** Bot Owner`
+
+        let str2
+        if(premiumOnly === true) str2 = `${config.emojis.currency} **Premium Only:** ${config.emojis.yes}\n`
+        else str2 = ''
 
         for(const alias of commands){
             const command = `${config.prefix}${alias.toLowerCase()}`
@@ -71,6 +76,22 @@ module.exports = (client, commandOptions) => {
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
                     .setFooter(config.botname)
                     .setTimestamp()
+                    .setDescription(`${config.emojis.no} This is an \`PREMIUM-ONLY\` command!`)
+                    message.channel.send(embed).then((message) => {
+                        message.delete({
+                            timeout: 5000
+                        })
+                    })
+                    message.delete()
+                    return
+                }
+
+                if(premiumOnly == true && !premium.includes(guild.id)) {
+                    const embed = new MessageEmbed()
+                    .setColor('RED')
+                    .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                    .setFooter(config.botname)
+                    .setTimestamp()
                     .setDescription(`${config.emojis.no} This is an \`DEVELOPER-ONLY\` command!`)
                     message.channel.send(embed).then((message) => {
                         message.delete({
@@ -91,6 +112,7 @@ module.exports = (client, commandOptions) => {
                         `${config.emojis.info} **Description:** ${description}\n` +
                         `${config.emojis.slowmode} **Cooldown:** ${cooldown} seconds!\n` +
                         `${str}\n` +
+                        `${str2}`+
                         `${config.emojis.arrowRight} **Usage:** ${usage}`
                     )
                     return message.channel.send(embed)

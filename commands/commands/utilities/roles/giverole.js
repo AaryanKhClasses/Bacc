@@ -3,8 +3,11 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'giverole',
+    description: 'Gives a role to a member!',
+    usage: '!giverole [role] [member]',
+    permLevel: 2,
     cooldown: 10,
-    callback: (client, message, args) => { //!giverole 
+    callback: (client, message, args) => { 
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
 

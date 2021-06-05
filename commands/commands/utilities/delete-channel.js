@@ -4,6 +4,9 @@ const { MessageButton } = require('discord-buttons')
 
 module.exports = {
     commands: 'delete-channel',
+    description: 'Deletes the specified channel!',
+    usage: '!delete-channel (optional channel)',
+    permLevel: 3,
     cooldown: 10,
     callback: (client, message, args) => {
         if(message.member.hasPermission('ADMINISTARTOR')) {

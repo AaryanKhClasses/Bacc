@@ -5,6 +5,10 @@ const afkModel = require('../../../models/afkModel')
 module.exports = {
     commands: 'afk',
     cooldown: 10,
+    description: 'Sets the AFK of the member!',
+    usage: '!afk (optional reason)',
+    permLevel: 0,
+    premiumOnly: true,
     callback: async(client, message, args) => {
         if(message.mentions.roles.first() || message.mentions.members.first()) {
             const embed = new MessageEmbed()

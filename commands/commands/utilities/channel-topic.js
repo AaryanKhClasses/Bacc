@@ -3,6 +3,9 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'channel-topic',
+    description: 'Changes the channel topic of the specified channel!',
+    usage: '!channel-topic [channel] [topic]',
+    permLevel: 3,
     cooldown: 10,
     callback: (client, message, args) => {
         if(message.member.hasPermission('MANAGE_CHANNELS')) {

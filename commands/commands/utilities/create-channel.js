@@ -3,6 +3,9 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'create-channel',
+    description: 'Creates a channel to the specified category!',
+    usage: '!create-channel [category] [channel type(text/voice/news)] [channel name]',
+    permLevel: 3,
     cooldown: 10,
     callback: (client, message, args) => {
         if(message.member.hasPermission('MANAGE_CHANNELS')){
