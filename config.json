@@ -68,6 +68,15 @@
         "share": "<:share:849886791195426817>",
         "contact": "<:contact:849886791233568778>",
         "magic": "<:magic:850998643967918111>",
-        "search": "<:search:850998643888095233>"
+        "search": "<:search:850998643888095233>",
+        "personAdd": "<:personAdd:851352223211978762>",
+        "personRemove": "<:personRemove:851352222947213343>",
+        "date": "<:date:849572880563699752>",
+        "addCircle": "<:addCircle:851356297310896159>",
+        "removeCircle": "<:removeCircle:851356297441968138>",
+        "text": "<:text:851359509762408508>",
+        "megaphone": "<:megaphone:851359509926379570>",
+        "groups": "<:groups:851363995034451988>",
+        "mention": "<:mention:851380371911081984>"
     }
 }
