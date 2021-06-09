@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = (client) => {
     client.on('messageDelete', (message) => {
+        if(message.author.bot) return
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
     
         const logEmbed = new MessageEmbed()
