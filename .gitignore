@@ -22,4 +22,4 @@ index.js
 models
 commands/a.js
 commands/commands/customisation
-commands/commands/moderation
+commands/commands/moderation/guildUserBlacklist.js
