@@ -18,7 +18,7 @@ module.exports = {
         }
 
         if(message.member.roles.cache.find(r => r.name.includes('Trusted')) || message.author.id === message.guild.ownerID) {
-            if(args[0].toLowerCase() === 'all') {
+            if(args[0] && args[0].toLowerCase() === 'all') {
                 const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category' && ch.name.includes('-🔒'))
                 channels.forEach(channel => {
                     channel.updateOverwrite(message.guild.roles.everyone, { SEND_MESSAGES: true, CONNECT: true }).then(() => { channel.setName(channel.name.replace('-🔒', '')) })

@@ -11,9 +11,6 @@ const economy = require('./utils/economy.js')
 const loadEvents = require('./events/load-events.js')
 const loadModules = require('./modules/load-modules.js')
 
-client.queue = new Map()
-client.vote = new Map()
-
 client.on('ready', () => {
     console.log('The Bot is Online!')
     client.user.setActivity(`${config.prefix}help`, {type: 'LISTENING'}).catch(console.error)
