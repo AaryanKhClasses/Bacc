@@ -19,7 +19,6 @@ module.exports = {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
         if(args[0] === 'add') {
-            if(message.member.hasPermission('MANAGE_EMOJIS')) {
                 message.guild.emojis.create(args[1], args[2]).then(() => {
                     const embed = new MessageEmbed()
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
@@ -27,7 +26,7 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully added emoji: :${args[2]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.lineReply(embed).then((message) => {
+                    message.reply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -55,21 +54,8 @@ module.exports = {
                     )
                     channel.send(logembed)
                 })
-            } else {
-                const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
-                .setColor('RED')
-                .setFooter(config.botname)
-                .setTimestamp()
-                return message.lineReply(embed).then((message) => {
-                    message.delete({
-                        timeout: 5000
-                    })
-                })
-            }
         
         } else if(args[0] === 'remove' || args[0] === 'delete') {
-            if(message.member.hasPermission('MANAGE_EMOJIS')){
                 message.guild.emojis.cache.get(args[1]).delete().then(() => {
                     const embed = new MessageEmbed()
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
@@ -77,7 +63,7 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully deleted emoji: :${args[1]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.lineReply(embed).then((message) => {
+                    message.reply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -105,20 +91,7 @@ module.exports = {
                     )
                     channel.send(logembed)
                 })
-            } else {
-                const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
-                .setColor('RED')
-                .setFooter(config.botname)
-                .setTimestamp()
-                return message.lineReply(embed).then((message) => {
-                    message.delete({
-                        timeout: 5000
-                    })
-                })
-            }
         }  else if(args[0] === 'rename') {
-            if(message.member.hasPermission('MANAGE_EMOJIS')){
                 message.guild.emojis.cache.get(args[1]).edit({ name: args[2] }).then(() => {
                     const embed = new MessageEmbed()
                     .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
@@ -126,7 +99,7 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully renamed emoji from :${args[1]}: to :${args[2]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.lineReply(embed).then((message) => {
+                    message.reply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -158,18 +131,6 @@ module.exports = {
                     )
                     channel.send(logembed)
                 })
-            } else {
-                const embed = new MessageEmbed()
-                .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
-                .setColor('RED')
-                .setFooter(config.botname)
-                .setTimestamp()
-                return message.lineReply(embed).then((message) => {
-                    message.delete({
-                        timeout: 5000
-                    })
-                })
-            }
         } else if(args[0] === 'stats') {
             let total
             if(message.guild.premiumTier === 0) {
@@ -195,7 +156,7 @@ module.exports = {
                 )
             .setFooter(config.botname)
             .setTimestamp()
-            message.lineReply(embed)
+            message.reply(embed)
 
         }
     }

@@ -17,7 +17,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.no} Please specify a query to search on DDG!`)
-            message.lineReply(embed)
+            message.reply(embed)
         }
 
         let options = {
@@ -48,7 +48,7 @@ module.exports = {
                 .setTimestamp()
                 .setDescription(`${string}`)
             }
-            message.lineReply(embed)
+            message.reply(embed)
         })
     }
 }

@@ -12,7 +12,6 @@ module.exports = {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
 
-        if(message.member.hasPermission('ADMINISTRATOR')){
             let target
             if(message.mentions.members.first()) {
                 target = message.mentions.members.first()
@@ -30,7 +29,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -44,7 +43,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -57,7 +56,7 @@ module.exports = {
             .setColor('GREEN')
             .setFooter(config.botname)
             .setTimestamp()
-            message.lineReply(embed).then((message) => {
+            message.reply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
@@ -88,17 +87,5 @@ module.exports = {
                 }
             )
             channel.send(logembed)
-        } else {
-            const embed = new MessageEmbed()
-            .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
-            .setColor('RED')
-            .setFooter(config.botname)
-            .setTimestamp()
-            return message.lineReply(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
-            })
-        }
     }
 }

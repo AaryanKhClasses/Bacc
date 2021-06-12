@@ -11,7 +11,6 @@ module.exports = {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
 
-        if(message.member.hasPermission('MANAGE_ROLES')){
             let role
             if(message.mentions.roles.first()) {
                 role = message.mentions.roles.first()
@@ -32,7 +31,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -45,7 +44,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -58,21 +57,21 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
                 })
             }
 
-            const userposition = message.member.roles.highest.position
+            const userposition = message.guild.members.cache.get(message.author.id).roles.highest.position
             if(userposition <= role.position) {
                 const embed = new MessageEmbed()
                 .setDescription(`${config.emojis.no} Cannot give the role as the role you want to give has a higher or similar position as your role position!`)
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -85,7 +84,7 @@ module.exports = {
             .setColor('GREEN')
             .setFooter(config.botname)
             .setTimestamp()
-            message.lineReply(embed).then((message) => {
+            message.reply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
@@ -118,17 +117,5 @@ module.exports = {
                 }
             )
             channel.send(logembed)
-        } else {
-            const embed = new MessageEmbed()
-            .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
-            .setColor('RED')
-            .setFooter(config.botname)
-            .setTimestamp()
-            return message.lineReply(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
-            })
-        }
     }
 }

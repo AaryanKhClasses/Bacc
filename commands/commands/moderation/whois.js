@@ -1,5 +1,4 @@
-const { MessageButton } = require("discord-buttons")
-const { MessageEmbed } = require("discord.js")
+const { MessageEmbed, Permissions } = require('discord.js')
 const { Menu } = require('discord.js-menu')
 const config = require('../../../config.json')
 
@@ -19,14 +18,14 @@ module.exports = {
         } else if(args[0]){
             target = message.guild.members.cache.get(args[0])
         } else {
-            target = message.member
+            target = message.guild.members.cache.get(message.author.id)
         }   
 
         let permlevel
-        if(target.hasPermission("SEND_MESSAGES")) permlevel = `${config.emojis.user} Normal Member`
-        if(target.hasPermission("MANAGE_MESSAGES")) permlevel = `${config.emojis.info} Helper`
-        if(target.hasPermission("BAN_MEMBERS")) permlevel = `${config.emojis.mod} Moderator`
-        if(target.hasPermission("MANAGE_GUILD")) permlevel = `${config.emojis.admin} Administrator`
+        if(target.permissions.has(Permissions.FLAGS.SEND_MESSAGES)) permlevel = `${config.emojis.user} Normal Member`
+        if(target.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) permlevel = `${config.emojis.info} Helper`
+        if(target.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) permlevel = `${config.emojis.mod} Moderator`
+        if(target.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) permlevel = `${config.emojis.admin} Administrator`
         if(target.roles.cache.find(r => r.name.includes(`Trusted`))) permlevel = `${config.emojis.manage} Trusted Admin`
         if(target.id === message.guild.ownerID) permlevel = `${config.emojis.star} Server Owner`
         if(target.id === config.botOwner) permlevel = `${config.emojis.copyright} Bot Owner`
@@ -39,20 +38,20 @@ module.exports = {
         }
 
         let perm1, perm2, perm3, perm4, perm5, perm6, perm7, perm8, perm9, perm10, perm11, perm12, perm13
-        if(target.hasPermission('ADMINISTRATOR')) { perm1 = 'Administrator, ' } else { perm1 = '' }
-        if(target.hasPermission('MANAGE_GUILD')) { perm2 = 'Manage Server, ' } else { perm2 = '' }
-        if(target.hasPermission('MANAGE_CHANNELS')) { perm3 = 'Manage Channels, ' } else { perm3 = '' }
-        if(target.hasPermission('MANAGE_ROLES')) { perm4 = 'Manage Roles, ' } else { perm4 = '' }
-        if(target.hasPermission('MANAGE_MESSAGES')) { perm5 = 'Manage Messages, ' } else { perm5 = '' }
-        if(target.hasPermission('MANAGE_EMOJIS')) { perm6 = 'Manage Emojis, ' } else { perm6 = '' }
-        if(target.hasPermission('KICK_MEMBERS')) { perm7 = 'Kick Members, ' } else { perm7 = '' }
-        if(target.hasPermission('BAN_MEMBERS')) { perm8 = 'Ban Members, ' } else { perm8 = '' }
-        if(target.hasPermission('MENTION_EVERYONE')) { perm9 = 'Mention Everyone, ' } else { perm9 = '' }
-        if(target.hasPermission('MUTE_MEMBERS')) { perm10 = 'Mute Members, ' } else { perm10 = '' }
-        if(target.hasPermission('DEAFEN_MEMBERS')) { perm11 = 'Deafen Members, ' } else { perm11 = '' }
-        if(target.hasPermission('MOVE_MEMBERS')) { perm12 = 'Move Members' } else { perm12 = '' }
-        if(!target.hasPermission('ADMINISTRATOR') && !target.hasPermission('MANAGE_GUILD') && !target.hasPermission('MANAGE_CHANNELS') && !target.hasPermission('MANAGE_MESSAGES') && !target.hasPermission('MANAGE_EMOJIS')
-            && !target.hasPermission('KICK_MEMBERS') && !target.hasPermission('BAN_MEMBERS') && !target.hasPermission('MENTION_EVERYONE') && !target.hasPermission('MUTE_MEMBERS') && !target.hasPermission('DEAFEN_MEMBERS') && !target.hasPermission('MOVE_MEMBERS')) {
+        if(target.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) { perm1 = 'Administrator, ' } else { perm1 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) { perm2 = 'Manage Server, ' } else { perm2 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) { perm3 = 'Manage Channels, ' } else { perm3 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) { perm4 = 'Manage Roles, ' } else { perm4 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) { perm5 = 'Manage Messages, ' } else { perm5 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MANAGE_EMOJIS)) { perm6 = 'Manage Emojis, ' } else { perm6 = '' }
+        if(target.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) { perm7 = 'Kick Members, ' } else { perm7 = '' }
+        if(target.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) { perm8 = 'Ban Members, ' } else { perm8 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MENTION_EVERYONE)) { perm9 = 'Mention Everyone, ' } else { perm9 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MUTE_MEMBERS)) { perm10 = 'Mute Members, ' } else { perm10 = '' }
+        if(target.permissions.has(Permissions.FLAGS.DEAFEN_MEMBERS)) { perm11 = 'Deafen Members, ' } else { perm11 = '' }
+        if(target.permissions.has(Permissions.FLAGS.MOVE_MEMBERS)) { perm12 = 'Move Members' } else { perm12 = '' }
+        if(!target.permissions.has(Permissions.FLAGS.ADMINISTRATOR) && !target.permissions.has(Permissions.FLAGS.MANAGE_GUILD) && !target.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) && !target.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) && !target.permissions.has(Permissions.FLAGS.MANAGE_ROLES) && !target.permissions.has(Permissions.FLAGS.MANAGE_EMOJIS)
+            && !target.permissions.has(Permissions.FLAGS.KICK_MEMBERS) && !target.permissions.has(Permissions.FLAGS.BAN_MEMBERS) && !target.permissions.has(Permissions.FLAGS.MENTION_EVERYONE) && !target.permissions.has(Permissions.FLAGS.MUTE_MEMBERS) && !target.permissions.has(Permissions.FLAGS.DEAFEN_MEMBERS) && !target.permissions.has('MOVE_MEMBERS')) {
                 perm13 = 'Normal Perms!'
             } else { perm13 = '' }
 

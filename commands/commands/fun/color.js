@@ -15,7 +15,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.no} Please specify a color name or an hex color!`)
-            return message.lineReply(embed)
+            return message.reply(embed)
         }
 
         const embed = new MessageEmbed()
@@ -24,6 +24,6 @@ module.exports = {
         .setFooter(config.botname)
         .setTimestamp()
         .setDescription(`${config.emojis.yes} This is the color you specified: ${args[0]}`)
-        message.lineReply(embed)
+        message.reply(embed)
     }
 }

@@ -17,7 +17,7 @@ module.exports = {
             channelID = message.channel
         }
 
-        if(message.member.roles.cache.find(r => r.name.includes('Trusted')) || message.author.id === message.guild.ownerID) {
+        if(message.guild.members.cache.get(message.author.id).roles.cache.find(r => r.name.includes('Trusted')) || message.author.id === message.guild.ownerID) {
             if(args[0] && args[0].toLowerCase() === 'all') {
                 const channels = message.guild.channels.cache.filter(ch => ch.type !== 'category' && ch.name.includes('-🔒'))
                 channels.forEach(channel => {
@@ -29,8 +29,8 @@ module.exports = {
                 .setFooter(config.botname)
                 .setTimestamp()
                 .setDescription(`${config.emojis.yes} Successfully unlocked \`ALL\` channels!`)
-                message.lineReply(embed)
-                return message.lineReply(embed)
+                message.reply(embed)
+                return message.reply(embed)
             }
 
             if(!channelID.name.includes('-🔒')) {
@@ -40,8 +40,8 @@ module.exports = {
                 .setFooter(config.botname)
                 .setTimestamp()
                 .setDescription(`${config.emojis.no} Channel \`${channelID.name}\` is already unlocked!`)
-                message.lineReply(embed)
-                return message.lineReply(embed)
+                message.reply(embed)
+                return message.reply(embed)
             }
             channelID.updateOverwrite(message.guild.roles.everyone, { SEND_MESSAGES: true, CONNECT: true }).then(() => channelID.setName(channelID.name.replace('-🔒', '')))
             const embed = new MessageEmbed()
@@ -50,19 +50,8 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.yes} Successfully unlocked \`${channelID.name}\`!`)
-            message.lineReply(embed)
-            return message.lineReply(embed)
-        } else {
-            const embed = new MessageEmbed()
-            .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
-            .setColor('RED')
-            .setFooter(config.botname)
-            .setTimestamp()
-            return message.channel.send(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
-            })
+            message.reply(embed)
+            return message.reply(embed)
         }
     }
 }

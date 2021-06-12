@@ -15,7 +15,7 @@ module.exports = {
         }else if(args[0]) {
             target = message.guild.members.cache.get(args[0])
         } else {
-            target = message.member
+            target = message.guild.members.cache.get(message.author.id)
         }
 
         const user = await economy.fetchCoins(target.id, message.guild.id)
@@ -25,6 +25,6 @@ module.exports = {
         .setFooter(config.botname)
         .setTimestamp()
         .setDescription(`${config.emojis.currency} **Balance for <@${target.id}>:** ${user.coins} `)
-        message.lineReply(embed)
+        message.reply(embed)
     }
 }

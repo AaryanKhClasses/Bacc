@@ -1,6 +1,6 @@
 {
   "name": "Bacc",
-  "version": "1.0.8",
+  "version": "1.1.0-BETA1",
   "description": "A multipurpose and a fully customisable discord bot!",
   "main": "index.js",
   "scripts": {
@@ -21,9 +21,8 @@
     "@iamtraction/google-translate": "^1.1.2",
     "bacclib": "^1.0.2",
     "canvacord": "^5.2.0",
-    "discord-buttons": "^2.4.1",
     "discord-reply": "^0.1.2",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.0.0-dev.f5f3f772865ee98bbb44df938e0e71f9f8865c10",
     "discord.js-menu": "^2.3.1",
     "dotenv": "^9.0.2",
     "ffmpeg-static": "^4.3.0",

@@ -8,7 +8,6 @@ module.exports = {
     permLevel: 3,
     cooldown: 10,
     callback: (client, message, args) => {
-        if(message.member.hasPermission('MANAGE_CHANNELS')) {
             const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
             const channel = message.guild.channels.cache.get(channell)
 
@@ -28,7 +27,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -42,7 +41,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -56,7 +55,7 @@ module.exports = {
             .setFooter(config.botname)
             .setColor('GREEN')
             .setTimestamp()
-            message.lineReply(embed).then((message) => {
+            message.reply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
@@ -87,17 +86,5 @@ module.exports = {
                 }
             )
             channel.send(logembed)
-        } else {
-            const embed = new MessageEmbed()
-            .setDescription(`${config.emojis.no} You don't have permissions to use this command!`)
-            .setColor('RED')
-            .setFooter(config.botname)
-            .setTimestamp()
-            return message.lineReply(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
-            })
-        }
     }
 }

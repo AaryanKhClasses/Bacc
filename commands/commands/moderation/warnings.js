@@ -7,14 +7,14 @@
 //     commands: 'warnings',
 //     cooldown: 10,
 //     callback: async(client, message, args) => {
-//         if(message.member.hasPermission('MANAGE_MESSAGES')){
+//         if(message.guild.members.cache.get(message.author.id).hasPermission('MANAGE_MESSAGES')){
 //             let user
 //             if(message.mentions.members.first()) {
 //                 user = message.mentions.members.first()
 //             } else if(args[0]) {
 //                 user = message.guild.members.cache.get(args[0])
 //             } else {
-//                 user = message.member
+//                 user = message.guild.members.cache.get(message.author.id)
 //             }
 
 //             if(!user){

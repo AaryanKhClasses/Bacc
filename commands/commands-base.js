@@ -1,5 +1,5 @@
 const config = require('../config.json')
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, Permissions } = require('discord.js')
 // const guildModel = require('../models/blacklists/guildModel')
 // const userModel = require('../models/blacklists/userModel')
 const premium = ['840494427595866142', '846372708694229012']
@@ -28,7 +28,8 @@ module.exports = (client, commandOptions) => {
     console.log(`Registering command "${commands[0]}"`)
 
     client.on('message', async (message) => {
-        const { member, content, guild, channel } = message
+        const { content, guild, channel } = message
+        const member = message.guild.members.cache.get(message.author.id)
 
         const args = content.split(/[ ]+/)
         args.shift()
@@ -54,6 +55,100 @@ module.exports = (client, commandOptions) => {
                 content.toLowerCase() === command
             ){
 
+                if(permLevel === 1 && (!member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) || !member.permissions.has(Permissions.FLAGS.BAN_MEMBERS) || !member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || !member.roles.cache.find(r => r.name.includes('Trusted')))){
+                    const embed = new MessageEmbed()
+                    .setColor('RED')
+                    .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                    .setFooter(config.botname)
+                    .setTimestamp()
+                    .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.info} This command requires Permission Level 1 (Helper) or higher!\n${config.emojis.user} You currently have Permission Level 0 (Normal Member)!`)
+                    return message.reply(embed)
+                }
+
+                if(permLevel === 2 && (!member.permissions.has(Permissions.FLAGS.BAN_MEMBERS) || !member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || !member.roles.cache.find(r => r.name.includes('Trusted')))){
+                    if(member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.mod} This command requires Permission Level 2 (Moderator) or higher!\n${config.emojis.info} You currently have Permission Level 1 (Helper)!`)
+                        return message.reply(embed)
+                    } else if(!member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.mod} This command requires Permission Level 2 (Moderator) or higher!\n${config.emojis.user} You currently have Permission Level 0 (Normal Member)!`)
+                        return message.reply(embed)
+                    }
+                }
+    
+                if(permLevel === 3 && (!member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) || !member.roles.cache.find(r => r.name.includes('Trusted')))){
+                    if(member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.admin} This command requires Permission Level 3 (Administrator) or higher!\n${config.emojis.mod} You currently have Permission Level 2 (Moderator)!`)
+                        return message.reply(embed)
+                    } else if(member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.admin} This command requires Permission Level 3 (Administrator) or higher!\n${config.emojis.info} You currently have Permission Level 1 (Helper)!`)
+                        return message.reply(embed)
+                    } else if(!member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) && !member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.admin} This command requires Permission Level 3 (Administrator) or higher!\n${config.emojis.user} You currently have Permission Level 0 (Normal Member)!`)
+                        return message.reply(embed)
+                    }
+                }
+
+                if(permLevel === 4 && !member.roles.cache.find(r => r.name.includes('Trusted'))){
+                    if(member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.manage} This command requires Permission Level 4 (Trusted Admin) or higher!\n${config.emojis.admin} You currently have Permission Level 3 (Administrator)!`)
+                        return message.reply(embed)
+                    } else if(member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.manage} This command requires Permission Level 4 (Trusted Admin) or higher!\n${config.emojis.mod} You currently have Permission Level 2 (Moderator)!`)
+                        return message.reply(embed)
+                    } else if(member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.manage} This command requires Permission Level 4 (Trusted Admin) or higher!\n${config.emojis.info} You currently have Permission Level 1 (Helper)!`)
+                        return message.reply(embed)
+                    } else if(!member.permissions.has(Permissions.FLAGS.ADMINISTRATOR) && !member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES) && !member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
+                        const embed = new MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
+                        .setFooter(config.botname)
+                        .setTimestamp()
+                        .setDescription(`${config.emojis.no} You don't have permissions to use this command!\n${config.emojis.manage} This command requires Permission Level 4 (Trusted Admin) or higher!\n${config.emojis.user} You currently have Permission Level 0 (Normal Member)!`)
+                        return message.reply(embed)
+                    }
+                }
+
                 if(ownerOnly == true && message.author.id !== message.guild.owner.id) {
                     const embed = new MessageEmbed()
                     .setColor('RED')
@@ -61,7 +156,7 @@ module.exports = (client, commandOptions) => {
                     .setFooter(config.botname)
                     .setTimestamp()
                     .setDescription(`${config.emojis.no} This is an \`OWNER-ONLY\` command!`)
-                    message.lineReply(embed).then((message) => {
+                    message.reply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -77,7 +172,7 @@ module.exports = (client, commandOptions) => {
                     .setFooter(config.botname)
                     .setTimestamp()
                     .setDescription(`${config.emojis.no} This is an \`DEVELOPER-ONLY\` command!`)
-                    message.lineReply(embed).then((message) => {
+                    message.reply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -93,7 +188,7 @@ module.exports = (client, commandOptions) => {
                     .setFooter(config.botname)
                     .setTimestamp()
                     .setDescription(`${config.emojis.no} This is an \`PREMIUM-ONLY\` command!`)
-                    message.lineReply(embed).then((message) => {
+                    message.reply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -115,7 +210,7 @@ module.exports = (client, commandOptions) => {
                         `${str2}`+
                         `${config.emojis.arrowRight} **Usage:** ${usage}`
                     )
-                    return message.lineReply(embed)
+                    return message.reply(embed)
                 }
 
                 let cooldownString = `${guild.id}-${member.id}-${commands[0]}`
@@ -128,7 +223,7 @@ module.exports = (client, commandOptions) => {
                     .setColor('RED')
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.lineReply(embed).then((message) => {
+                    message.reply(embed).then((message) => {
                         message.delete({
                             timeout: 5000
                         })
@@ -146,7 +241,7 @@ module.exports = (client, commandOptions) => {
                 //     .setColor('RED')
                 //     .setFooter(config.botname)
                 //     .setTimestamp()
-                //     return message.lineReply(embed).then((message) => {
+                //     return message.reply(embed).then((message) => {
                 //         message.delete({
                 //             timeout: 5000
                 //         })
@@ -161,7 +256,7 @@ module.exports = (client, commandOptions) => {
                 //     .setColor('RED')
                 //     .setFooter(config.botname)
                 //     .setTimestamp()
-                //     message.lineReply(embed).then((message) => {
+                //     message.reply(embed).then((message) => {
                 //         message.delete({
                 //             timeout: 5000
                 //         })

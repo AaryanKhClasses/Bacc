@@ -24,31 +24,31 @@ module.exports = async(client) => {
         }
         if(user.level === 1) {
             const lvl1role = message.guild.roles.cache.find((r => r.name.includes('Level 1')) && (r => !r.name.includes('Level 10')))
-            message.guild.member(message.author.id).roles.add(lvl1role)
+            message.guild.members.cache.get(message.author.id).roles.add(lvl1role)
         }
         if(user.level === 10) {
             const lvl10role = message.guild.roles.cache.find(r => r.name.includes('Level 10'))
-            message.guild.member(message.author.id).roles.add(lvl10role)
+            message.guild.members.cache.get(message.author.id).roles.add(lvl10role)
         }
         if(user.level === 20) {
             const lvl20role = message.guild.roles.cache.find(r => r.name.includes('Level 20'))
-            message.guild.member(message.author.id).roles.add(lvl20role)
+            message.guild.members.cache.get(message.author.id).roles.add(lvl20role)
         }
         if(user.level === 35) {
             const lvl35role = message.guild.roles.cache.find(r => r.name.includes('Level 35'))
-            message.guild.member(message.author.id).roles.add(lvl35role)
+            message.guild.members.cache.get(message.author.id).roles.add(lvl35role)
         }
         if(user.level === 50) {
             const lvl50role = message.guild.roles.cache.find(r => r.name.includes('Level 50'))
-            message.guild.member(message.author.id).roles.add(lvl50role)
+            message.guild.members.cache.get(message.author.id).roles.add(lvl50role)
         }
         if(user.level === 75) {
             const lvl75role = message.guild.roles.cache.find(r => r.name.includes('Level 75'))
-            message.guild.member(message.author.id).roles.add(lvl75role)
+            message.guild.members.cache.get(message.author.id).roles.add(lvl75role)
         }
         if(user.level === 100) {
             const lvl100role = message.guild.roles.cache.find(r => r.name.includes('Level 100'))
-            message.guild.member(message.author.id).roles.add(lvl100role)
+            message.guild.members.cache.get(message.author.id).roles.add(lvl100role)
         }
     })
 }

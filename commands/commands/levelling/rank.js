@@ -27,7 +27,7 @@ module.exports = {
             .setDescription('The mentioned user doesn\' have any XP! Get started by participating in chat to earn XP!')
             .setFooter(config.botname)
             .setTimestamp()
-            return message.lineReply(embed)
+            return message.reply(embed)
         }
 
         const rank = new canvacord.Rank()
@@ -41,7 +41,7 @@ module.exports = {
         .setDiscriminator(target.discriminator)
         rank.build().then(data => {
             const attachment = new MessageAttachment(data, 'rank.png')
-            message.lineReply(attachment)
+            message.reply(attachment)
         })
     }
 }

@@ -17,7 +17,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.no} <@${message.author.id}>, You cannot ping roles or members while setting AFK!`)
-            return message.lineReply(embed).then((message) => {
+            return message.reply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
@@ -33,7 +33,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.yes} <@${message.author.id}>, You are now **AFK**: ${reason}`)
-            message.lineReply(embed).then((message) => {
+            message.reply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
@@ -52,7 +52,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.yes} Welcome back <@${message.author.id}>! I removed your AFK!`)
-            message.lineReply(embed).then((message) => {
+            message.reply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })

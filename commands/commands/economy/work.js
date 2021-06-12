@@ -20,6 +20,6 @@ module.exports = {
         .setDescription(`${config.emojis.yes} ${work[Math.floor(Math.random() * work.length)]} You got ${config.emojis.currency} ${amount}`)
         .setFooter(config.botname)
         .setTimestamp()
-        message.lineReply(embed)
+        message.reply(embed)
     }
 }

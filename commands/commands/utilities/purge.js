@@ -11,7 +11,6 @@ module.exports = {
         const channell = message.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
         const channel = message.guild.channels.cache.get(channell)
 
-        if(message.member.hasPermission('MANAGE_MESSSAGES')){
             if(!args[0]) {
                 const embed = new MessageEmbed()
                 .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())
@@ -19,7 +18,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -33,7 +32,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setColor('RED')
                 .setTimestamp()
-                return message.lineReply(embed).then((message) => {
+                return message.reply(embed).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -46,7 +45,7 @@ module.exports = {
             .setFooter(config.botname)
             .setColor('RED')
             .setTimestamp()
-            message.lineReply(embed).then((message) => {
+            message.reply(embed).then((message) => {
                 message.delete({
                     timeout: 5000
                 })
@@ -82,6 +81,5 @@ module.exports = {
                 }
             )
             channel.send(logembed)
-        }
     }
 }

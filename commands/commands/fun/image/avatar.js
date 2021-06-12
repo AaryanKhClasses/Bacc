@@ -14,7 +14,7 @@ module.exports = {
         }else if(args[0]) {
             user = message.guild.members.cache.get(args[0])
         } else {
-            user = message.member
+            user = message.guild.members.cache.get(message.author.id)
         }
 
         const embed = new MessageEmbed()
@@ -24,6 +24,6 @@ module.exports = {
         .setTimestamp()
         .setDescription(`Avatar of <@${user.user.id}>`)
         .setImage(user.user.displayAvatarURL())
-        message.lineReply(embed)
+        message.reply(embed)
     }
 }

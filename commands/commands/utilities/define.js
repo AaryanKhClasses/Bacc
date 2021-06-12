@@ -17,7 +17,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.no} Please specify a query to define!`)
-            message.lineReply(embed)
+            message.reply(embed)
         }
 
         urban(args).first(json => {
@@ -28,7 +28,7 @@ module.exports = {
                 .setFooter(config.botname)
                 .setTimestamp()
                 .setDescription(`${config.emojis.no} Nothing found related to query: **${query}**`)
-                message.lineReply(embed)
+                message.reply(embed)
             }
 
             const embed = new MessageEmbed()
@@ -42,7 +42,7 @@ module.exports = {
                 `${config.emojis.description} **Definition:** ${json.definition}\n` +
                 `${config.emojis.user} **Definition by user:** ${json.author}`
             )
-            message.lineReply(embed)
+            message.reply(embed)
         })
     }
 }

@@ -17,7 +17,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.no} Please ask your question so that I can answer it!`)
-            message.lineReply(embed)
+            message.reply(embed)
         }
 
         const result = Math.floor((Math.random() * replies.length))
@@ -27,6 +27,6 @@ module.exports = {
         .setFooter(config.botname)
         .setTimestamp()
         .setDescription(`${config.emojis.magic} The Magical 8Ball!\n${config.emojis.info} **Question:** \`${query}\`\n${config.emojis.arrowRight} **Answer:** \`${replies[result]}\``)
-        message.lineReply(embed)
+        message.reply(embed)
     }
 }

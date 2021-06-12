@@ -28,7 +28,7 @@ module.exports = {
         .setTimestamp()
         .setDescription(`Pinging...`)
 
-        message.lineReply(embed).then((resultMessage) => {
+        message.reply({ embed: embed }).then((resultMessage) => {
             const ping = resultMessage.createdTimestamp - message.createdTimestamp
             const embed2 = new MessageEmbed()
             .setColor('BLUE')
@@ -41,7 +41,7 @@ module.exports = {
                 `${config.emojis.user} **Total Users:** \`${client.users.cache.size} Users\`\n` + 
                 `${config.emojis.group} **Total Servers:** \`${client.guilds.cache.size} Servers\``
             )    
-            resultMessage.edit(embed2)
+            resultMessage.edit({ embed: embed2 })
         })
     }
 }
