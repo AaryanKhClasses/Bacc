@@ -25,7 +25,7 @@
 //                 .setColor('RED')
 //                 .setFooter(config.botname)
 //                 .setTimestamp()
-//                 return message.channel.send(embed).then((message) => {
+//                 return message.reply({ embed: embed }).then((message) => {
 //                     message.delete({
 //                         timeout: 5000
 //                     })
@@ -48,7 +48,7 @@
 //                         .setColor('RED')
 //                         .setFooter(config.botname)
 //                         .setTimestamp()
-//                         return message.channel.send(embed)
+//                         return message.reply({ embed: embed })
 //                     }
 //                     for(const log of result.modlog){
 //                         const { logtype, author, authorId, moderator, timestamp, reason } = modlog
@@ -62,7 +62,7 @@
 //                         .setDescription(arr.join('\n'))
 //                         .setTimestamp()
 //                         .setFooter(config.botname)
-//                         message.channel.send(embed)
+//                         message.reply({ embed: embed })
 //                     }
 //                 }finally {
 //                     mongoose.connection.close()

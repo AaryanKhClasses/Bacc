@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     commands: 'botGuilds',
-    devOnly: true,
+    permLevel :6,
     callback: (client, message, args) => {
             const embed = new MessageEmbed() 
             .setAuthor(`${message.author.tag}`, message.author.displayAvatarURL())

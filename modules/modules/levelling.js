@@ -20,7 +20,7 @@ module.exports = async(client) => {
             .setDescription(`Yay <@${message.author.id}>! You have levelled up to ${user.level}!\nLevel up more to get various rewards!`)
             .setFooter(config.botname)
             .setTimestamp()
-            message.channel.send(embed)
+            message.reply({ embed: embed })
         }
         if(user.level === 1) {
             const lvl1role = message.guild.roles.cache.find((r => r.name.includes('Level 1')) && (r => !r.name.includes('Level 10')))

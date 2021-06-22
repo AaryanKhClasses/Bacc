@@ -26,11 +26,8 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully added emoji: :${args[2]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.reply(embed).then((message) => {
-                        message.delete({
-                            timeout: 5000
-                        })
-                    })
+                    message.reply({ embed: embed }).then((message) => {
++ client.setTimeout(() => message.delete(), 5000);                    })
                     message.delete()
 
                     const logembed = new MessageEmbed()
@@ -63,11 +60,8 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully deleted emoji: :${args[1]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.reply(embed).then((message) => {
-                        message.delete({
-                            timeout: 5000
-                        })
-                    })
+                    message.reply({ embed: embed }).then((message) => {
++ client.setTimeout(() => message.delete(), 5000);                    })
                     message.delete()
 
                     const logembed = new MessageEmbed()
@@ -99,11 +93,8 @@ module.exports = {
                     .setDescription(`${config.emojis.yes} Successfully renamed emoji from :${args[1]}: to :${args[2]}:`)
                     .setFooter(config.botname)
                     .setTimestamp()
-                    message.reply(embed).then((message) => {
-                        message.delete({
-                            timeout: 5000
-                        })
-                    })
+                    message.reply({ embed: embed }).then((message) => {
++ client.setTimeout(() => message.delete(), 5000);                    })
                     message.delete()
 
                     const logembed = new MessageEmbed()
@@ -156,7 +147,7 @@ module.exports = {
                 )
             .setFooter(config.botname)
             .setTimestamp()
-            message.reply(embed)
+            message.reply({ embed: embed })
 
         }
     }

@@ -17,6 +17,6 @@ module.exports = {
             `${config.emojis.share} [**Invite Bacc to your server!**](https://dsc.gg/baccbot)\n` +
             `${config.emojis.contact} [**Join BaccBot Support Server!**](https://dsc.gg/bacc)`
         )
-        message.reply(embed)
+        message.reply({ embed: embed })
     }
 }

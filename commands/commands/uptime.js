@@ -27,7 +27,7 @@ module.exports = {
         .setFooter(config.botname)
         .setTimestamp()
         .setDescription('Getting uptime...')
-        message.reply(embed).then((resultMessage) => {
+        message.reply({ embed: embed }).then((resultMessage) => {
             const ping = resultMessage.createdTimestamp - message.createdTimestamp
             const embed = new MessageEmbed()
             .setColor('GREEN')

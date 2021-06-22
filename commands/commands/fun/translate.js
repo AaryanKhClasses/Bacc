@@ -22,7 +22,7 @@ module.exports = {
             )
             .setFooter(config.botname)
             .setTimestamp()
-            message.reply(embed)
+            message.reply({ embed: embed })
         })
     }
 }

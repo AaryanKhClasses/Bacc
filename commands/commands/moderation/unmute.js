@@ -29,7 +29,7 @@
 //                 .setColor('RED')
 //                 .setFooter(config.botname)
 //                 .setTimestamp()
-//                 return message.channel.send(embed).then((message) => {
+//                 return message.reply({ embed: embed }).then((message) => {
 //                     message.delete({
 //                         timeout: 5000
 //                     })
@@ -42,7 +42,7 @@
 //                 .setColor('RED')
 //                 .setFooter(config.botname)
 //                 .setTimestamp()
-//                 return message.channel.send(embed).then((message) => {
+//                 return message.reply({ embed: embed }).then((message) => {
 //                     message.delete({
 //                         timeout: 5000
 //                     })
@@ -57,7 +57,7 @@
 //             .setColor('GREEN')
 //             .setFooter(config.botname)
 //             .setTimestamp()
-//             message.channel.send(embed).then((message) => {
+//             message.reply({ embed: embed }).then((message) => {
 //                 message.delete({
 //                     timeout: 5000
 //                 })

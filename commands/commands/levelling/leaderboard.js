@@ -17,7 +17,7 @@ module.exports = {
             .setDescription('Oop! Looks like no one here has any XP at all! Keep chatting to get on the leaderboard!')
             .setFooter(config.botname)
             .setTimestamp()
-            return message.reply(embed)
+            return message.reply({ embed: embed })
         }
 
         const leaderboard = await levelling.computeXpLeaderboard(client, rawleaderboard)
@@ -28,7 +28,7 @@ module.exports = {
         .setDescription(lb.join('\n'))
         .setFooter(config.botname)
         .setTimestamp()
-        return message.reply(embed)
+        return message.reply({ embed: embed })
     }
 }
 
@@ -60,6 +60,6 @@ module.exports = {
         .setDescription(arr.join('\n'))
         .setFooter(config.botname)
         .setTimestamp()
-        return message.reply(embed)
+        return message.reply({ embed: embed })
     }
 */

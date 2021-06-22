@@ -24,6 +24,6 @@ module.exports = {
         .setTimestamp()
         .setDescription(`Avatar of <@${user.user.id}>`)
         .setImage(user.user.displayAvatarURL())
-        message.reply(embed)
+        message.reply({ embed: embed })
     }
 }

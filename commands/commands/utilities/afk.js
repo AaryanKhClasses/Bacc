@@ -17,10 +17,8 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.no} <@${message.author.id}>, You cannot ping roles or members while setting AFK!`)
-            return message.reply(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
+            return message.reply({ embed: embed }).then((message) => {
+                client.setTimeout(() => message.delete(), 5000)
             })
         }
 
@@ -33,10 +31,8 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.yes} <@${message.author.id}>, You are now **AFK**: ${reason}`)
-            message.reply(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
+            message.reply({ embed: embed }).then((message) => {
+                client.setTimeout(() => message.delete(), 5000)
             })
             const newAfk = new afkModel({
                 guildID: message.guild.id,
@@ -52,10 +48,8 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.yes} Welcome back <@${message.author.id}>! I removed your AFK!`)
-            message.reply(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
+            message.reply({ embed: embed }).then((message) => {
+                client.setTimeout(() => message.delete(), 5000)
             })
         }
     }

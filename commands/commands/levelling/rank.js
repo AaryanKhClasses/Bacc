@@ -27,7 +27,7 @@ module.exports = {
             .setDescription('The mentioned user doesn\' have any XP! Get started by participating in chat to earn XP!')
             .setFooter(config.botname)
             .setTimestamp()
-            return message.reply(embed)
+            return message.reply({ embed: embed })
         }
 
         const rank = new canvacord.Rank()

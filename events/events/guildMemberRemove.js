@@ -15,7 +15,7 @@ module.exports = (client) => {
             .setColor('RED')
             .setFooter(config.botname)
             .setTimestamp()
-            member.guild.channels.cache.get(joinLogs).send(embed)
+            member.guild.channels.cache.get(joinLogs).send({ embed: embed })
         }
     })
 }

@@ -15,7 +15,7 @@ module.exports = (client) => {
                 .setFooter(config.botname)
                 .setTimestamp()
                 .setDescription(`<@${mentioned.id}> is currently AFK: ${data.reason}`)
-                message.channel.send(embed).then((message) => {
+                message.reply({ embed: embed }).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -31,10 +31,8 @@ module.exports = (client) => {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.yes} Welcome back <@${message.author.id}>! I removed your AFK!`)
-            message.channel.send(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
+            message.reply({ embed: embed }).then((message) => {
+                client.setTimeout(() => message.delete(), 5000)
             })
             mainData.deleteOne({ guildID: message.guild.id, userID: message.author.id })
         }

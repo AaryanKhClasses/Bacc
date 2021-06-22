@@ -24,7 +24,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.reply(embed).then((message) => {
+                return message.reply({ embed: embed }).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -38,7 +38,7 @@ module.exports = {
                 .setColor('RED')
                 .setFooter(config.botname)
                 .setTimestamp()
-                return message.reply(embed).then((message) => {
+                return message.reply({ embed: embed }).then((message) => {
                     message.delete({
                         timeout: 5000
                     })
@@ -51,10 +51,8 @@ module.exports = {
             .setColor('GREEN')
             .setFooter(config.botname)
             .setTimestamp()
-            message.reply(embed).then((message) => {
-                message.delete({
-                    timeout: 5000
-                })
+            message.reply({ embed: embed }).then((message) => {
+                client.setTimeout(() => message.delete(), 5000)
             })
             message.delete()
 

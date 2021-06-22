@@ -49,7 +49,7 @@
 //                     .setFooter(config.botname)
 //                     .setColor('GREEN')
 //                     .setTimestamp()
-//                     button.message.reply(embed).then((message) => {
+//                     button.message.reply({ embed: embed }).then((message) => {
 //                         message.delete({
 //                             timeout: 5000
 //                         })

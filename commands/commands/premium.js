@@ -20,6 +20,6 @@ module.exports = {
             `${config.emojis.blank} ${config.emojis.currency} **Monthly Currency:** Members can get access the the \`!monthly\` command!\n` +
             `${config.emojis.blank} ${config.emojis.slowmode} **Slowmode Command:** Slowmode commands can be accessed!`
         )
-        message.reply(embed)
+        message.reply({ embed: embed })
     }
 }
