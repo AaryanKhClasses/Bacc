@@ -3,10 +3,9 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = (client) => {
     client.on('guildMemberAdd', async(member) => {
-        const joinLogs = member.guild.channels.cache.find(ch => ch.name.includes('join-logs')).id
-        if(!joinLogs){
+        if(!member.guild.channels.cache.find(ch => ch.name.includes('join-logs')).id){
             return
-        }else if(joinLogs){
+        }else if(member.guild.channels.cache.find(ch => ch.name.includes('join-logs')).id){
             const embed = new MessageEmbed()
             .setAuthor(`Member Joined`, member.user.displayAvatarURL())
             .addField(`${config.emojis.date} Member Joined Date`, new Date(member.user.createdTimestamp).toLocaleDateString())
@@ -15,7 +14,7 @@ module.exports = (client) => {
             .setColor('GREEN')
             .setFooter(config.botname)
             .setTimestamp()
-            member.guild.channels.cache.get(joinLogs).send({ embed: embed })
+            member.guild.channels.cache.get(member.guild.channels.cache.find(ch => ch.name.includes('join-logs')).id).send({ embed: embed })
         }
     })
 }

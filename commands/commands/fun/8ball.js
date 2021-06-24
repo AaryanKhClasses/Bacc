@@ -17,7 +17,7 @@ module.exports = {
             .setFooter(config.botname)
             .setTimestamp()
             .setDescription(`${config.emojis.no} Please ask your question so that I can answer it!`)
-            message.reply({ embed: embed })
+            return message.reply({ embed: embed })
         }
 
         const result = Math.floor((Math.random() * replies.length))

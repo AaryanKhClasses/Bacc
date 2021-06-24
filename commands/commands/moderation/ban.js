@@ -42,6 +42,17 @@ module.exports = {
             })
         }
 
+        if(target.id === config.client_id) {
+            const embed = new MessageEmbed()
+            .setDescription(`${config.emojis.no} You can't ban me! Why do you even wanna do that?`)
+            .setColor('RED')
+            .setFooter(config.botname)
+            .setTimestamp()
+            return message.reply({ embed: embed }).then((message) => {
+                client.setTimeout(() => message.delete(), 5000)
+            })
+        }
+
         if(!reason) reason = 'No Reason Specified!'
 
         if(target.permissions.has(Permissions.FLAGS.BAN_MEMBERS) || target.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
