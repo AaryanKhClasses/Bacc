@@ -3,7 +3,8 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = (client) => {
     client.on('messageUpdate', (oldMessage, newMessage) => {
-        if(oldMessage.author.bot) return
+        if(oldMessage.author.bot) return;
+        if(oldMessage.content === newMessage.content) return;
         const channell = oldMessage.guild.channels.cache.find(ch => ch.name.includes("mod-logs")).id
 
         const logEmbed = new MessageEmbed()
